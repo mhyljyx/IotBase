@@ -19,4 +19,9 @@ public class PublicSubscribeParams {
    */
   private String receivePort;
 
+  /**
+   * 订阅名称
+   */
+  private String name;
+
 }

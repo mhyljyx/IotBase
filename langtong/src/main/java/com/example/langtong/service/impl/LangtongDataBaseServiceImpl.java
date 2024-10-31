@@ -5,7 +5,7 @@ import com.example.langtong.config.DataSourceConfig;
 import com.example.langtong.service.LangtongDataBaseService;
 import com.example.langtong.service.pojo.params.LangTongDoorPointParams;
 import com.example.langtong.service.pojo.params.LangTongAccessInfoParams;
-import com.xinran.common.util.DateUtil;
+import com.xinran.util.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

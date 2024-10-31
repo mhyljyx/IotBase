@@ -3,7 +3,7 @@ package com.xinran.haikang.service.impl;
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
-import com.xinran.common.util.Result;
+import com.xinran.util.Result;
 import com.xinran.haikang.pojo.params.EventSubscribeParams;
 import com.xinran.haikang.service.SubscribeService;
 import com.xinran.haikang.util.HaiKangRequestHelper;
@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import javax.validation.Validation;
-import javax.validation.Validator;
 
 @Slf4j
 @Service

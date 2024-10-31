@@ -2,6 +2,7 @@ package com.xinran.dahua.enums;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 消防告警类型
@@ -22,10 +23,10 @@ public enum TypeFireAlarmEnums {
     this.msg = msg;
   }
 
-  List<String> getCodes() {
-    Arrays.stream(TypeFireAlarmEnums.values()).forEach(value -> {
-      value.code;
-    });
+  public static List<String> getCodes() {
+    return Arrays.stream(TypeFireAlarmEnums.values())
+            .map(value -> value.code)
+            .collect(Collectors.toList());
   }
 
 }

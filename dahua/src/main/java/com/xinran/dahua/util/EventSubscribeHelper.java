@@ -1,10 +1,14 @@
 package com.xinran.dahua.util;
 
+import cn.hutool.core.util.StrUtil;
 import com.dahuatech.hutool.http.Method;
 import com.dahuatech.hutool.json.JSONUtil;
+import com.dahuatech.icc.event.model.v202011.EventSubscribeDelRequest;
+import com.dahuatech.icc.event.model.v202011.EventSubscribeDelResponse;
 import com.dahuatech.icc.exception.ClientException;
 import com.dahuatech.icc.oauth.http.DefaultClient;
 import com.dahuatech.icc.oauth.http.IClient;
+import com.dahuatech.icc.oauth.http.IccResponse;
 import com.dahuatech.icc.oauth.model.v202010.GeneralRequest;
 import com.dahuatech.icc.oauth.model.v202010.GeneralResponse;
 import com.xinran.dahua.model.event.*;
@@ -24,23 +28,47 @@ public class EventSubscribeHelper {
   private String eventSubscribeUrl;
 
   /**
-   * 订阅报警事件
+   * 订阅事件
    * 一般接收地址一个monitor信息即可，如果要按照不同的类型，写多个monitor信息即可
    */
-  public GeneralResponse subscribeAlarm(EventSubscribeParams params) throws ClientException {
+  public IccResponse subscribeEvent(EventSubscribeParams params) throws ClientException {
     List<EventVo> eventVos = new ArrayList<>();
     eventVos.add(buildEvent(params));
     String alarmMonitor = "http://" + params.getReceiveIp() + ":" + params.getReceivePort() + "/dahua/eventMsg/receive";
-    String magic = params.getReceiveIp() + "_" + params.getReceivePort() + "_alarm";
-    SubscribeVo subscribeVo = buildParams(magic, eventVos, alarmMonitor);
+    String magic = params.getReceiveIp() + "_" + params.getReceivePort();
+    if (StrUtil.isBlank(params.getName())) {
+      params.setName(magic);
+    }
+    SubscribeVo subscribeVo = buildParams(params.getName(), magic, eventVos, alarmMonitor);
     IClient iClient = new DefaultClient();
     GeneralRequest generalRequest =
       new GeneralRequest(eventSubscribeUrl, Method.POST);
     // 设置参数
     generalRequest.body(JSONUtil.toJsonStr(subscribeVo));
-    System.out.println(JSONUtil.toJsonStr(subscribeVo));
     GeneralResponse response = iClient.doAction(generalRequest, generalRequest.getResponseClass());
     return response;
+  }
+
+  /**
+   * 订阅事件记录查询示例
+   */
+  public IccResponse subscribeEventQuery(String category) throws ClientException {
+    IClient iClient = new DefaultClient();
+    EventSubscribeQueryRequest subscribeRequest = new EventSubscribeQueryRequest(category);
+    IccResponse res =
+            iClient.doAction(subscribeRequest, subscribeRequest.getResponseClass());
+    return res;
+  }
+
+  /**
+   * 事件取消订阅示例
+   */
+  public IccResponse eventUnSubscribe(String subscribeName) throws ClientException {
+    IClient iClient = new DefaultClient();
+    // 事件订阅按`name`字段取消
+    EventSubscribeDelRequest subscribeRequest = new EventSubscribeDelRequest(subscribeName);
+    IccResponse res = iClient.doAction(subscribeRequest, subscribeRequest.getResponseClass());
+    return res;
   }
 
   /**
@@ -55,7 +83,7 @@ public class EventSubscribeHelper {
     return eventVo;
   }
 
-  private SubscribeVo buildParams(String magic, List<EventVo> eventVos, String monitor){
+  private SubscribeVo buildParams(String name, String magic, List<EventVo> eventVos, String monitor){
     List<MonitorVo> monitorVos = new ArrayList<>();
     MonitorVo monitorVo = new MonitorVo();
     monitorVo.setEvents(eventVos);
@@ -64,7 +92,7 @@ public class EventSubscribeHelper {
 
     SubsystemVo subsystemVo = new SubsystemVo();
     subsystemVo.setMagic(magic);
-    subsystemVo.setName(subsystemVo.getMagic());//默认与magic一样
+    subsystemVo.setName(name);
 
     SubscribeParamVo subscribeParamVo = new SubscribeParamVo();
     subscribeParamVo.setSubsystem(subsystemVo);
@@ -84,7 +112,7 @@ public class EventSubscribeHelper {
    * @param orgs
    * @return
    */
-  private List<AuthorityVo> buildAuthority(List<String> types, List<String> nodeCodes, List<String>orgs){
+  private List<AuthorityVo> buildAuthority(List<String> types, List<String> nodeCodes, List<String> orgs){
     List<AuthorityVo> list = new ArrayList<>();
     AuthorityVo authorityVo = new AuthorityVo();
     authorityVo.setNodeCodes(nodeCodes);//调设备/通道分页查询、设备数获取列表

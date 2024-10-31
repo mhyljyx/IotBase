@@ -1,7 +1,7 @@
 package com.xinran.haikang.service.impl;
 
 import com.alibaba.fastjson2.JSON;
-import com.xinran.common.util.Result;
+import com.xinran.util.Result;
 import com.xinran.haikang.pojo.params.IUAlarmEventEventParams;
 import com.xinran.haikang.service.AlarmEventService;
 import lombok.extern.slf4j.Slf4j;

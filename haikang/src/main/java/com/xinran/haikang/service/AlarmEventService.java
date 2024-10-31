@@ -1,6 +1,6 @@
 package com.xinran.haikang.service;
 
-import com.xinran.common.util.Result;
+import com.xinran.util.Result;
 
 /**
  * 报警事件接收
