@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.xinran</groupId>
+  <artifactId>IoTBase</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>IoTBase</name>
+  <description>物联网底座</description>
+
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>common</module>
+    <module>dahua</module>
+    <module>haikang</module>
+    <module>hospital</module>
+    <module>langtong</module>
+    <module>boshi-udp-server</module>
+  </modules>
+
+  <properties>
+    <java.version>1.8</java.version>
+    <maven.complier.source>8</maven.complier.source>
+    <maven.complier.target>8</maven.complier.target>
+    <spring-boot.version>2.7.1</spring-boot.version>
+    <icc.sdk.version>1.0.9.2</icc.sdk.version>
+    <hutool.version>5.6.3</hutool.version>
+    <fastJson2.version>2.0.23</fastJson2.version>
+    <artemis-http-client.version>1.1.3</artemis-http-client.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.26</version>
+    </dependency>
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>${hutool.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.alibaba.fastjson2</groupId>
+      <artifactId>fastjson2</artifactId>
+      <version>${fastJson2.version}</version>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-dependencies</artifactId>
+        <version>${spring-boot.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>

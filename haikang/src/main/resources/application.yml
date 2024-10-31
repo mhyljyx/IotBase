@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: haikang
+
+haikang:
+  isc:
+    host: 192.168.191.150:443
+    app-key: 23520484
+    app-secret: YH4RssdvKHWX1DlcZJxS
+    artemis-path: /artemis
+    content-type: application/json
+    event:
+      #    按事件类型订阅事件
+      event-subscribe-url: /api/eventService/v1/eventSubscriptionByEventTypes
+      #    查询事件订阅信息
+      event-subscribe-query-url: /api/eventService/v1/eventSubscriptionView
+      #    查询入侵报警主机url
+      ias-device-query-url: /api/resource/v2/iasDevice/search
+      #    查询入侵报警防区url
+      ias-device-defence-query-url: /api/scpms/v1/iasDevice/defence
+      #    查询资源列表v2
+      resource-query-url: /api/irds/v2/resource/resourcesByParams

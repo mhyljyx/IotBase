@@ -1,0 +1,27 @@
+spring:
+  application:
+  name: dahua
+
+dahua:
+  icc:
+    account: system
+    password: Admin123
+    client-id: xinran
+    client-secret: da82af44-9aeb-4f48-8895-257595df9972
+    url: https://192.168.191.161
+    oauth:
+      #    获取公钥
+      public-key-url: /evo-apigw/evo-oauth/1.0.0/oauth/public-key
+      #    认证
+      user-password-auth-url: /evo-apigw/evo-oauth/1.0.0/oauth/extend/token
+      #    刷新认证信息
+      user-password-refresh-token-url: /evo-apigw/evo-oauth/1.0.0/oauth/extend/refresh/token
+    event:
+      #    事件订阅
+      event-subscribe-url: /evo-apigw/evo-event/1.0.0/subscribe/mqinfo
+    device:
+      #    设备分页查询
+      device-query-url: /evo-apigw/evo-brm/1.2.0/device/subsystem/page
+    security:
+      #    查询站点
+      security-station-point-url: /evo-apigw/evo-isc/1.0.0/stationPoint/list

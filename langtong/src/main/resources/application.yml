@@ -1,0 +1,10 @@
+spring:
+  application:
+  name: langtong
+
+sqlserver:
+  url: jdbc:sqlserver://192.168.191.66:1433;DatabaseName = BECK2800;encrypt=false
+  username: xinran
+  password: 123
+  driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
