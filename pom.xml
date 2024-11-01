@@ -13,15 +13,14 @@
 
   <modules>
     <module>common</module>
-    <module>dahua</module>
-    <module>haikang</module>
     <module>hospital</module>
-    <module>langtong</module>
-    <module>boshi-udp-server</module>
+    <module>thread-pool</module>
   </modules>
 
   <properties>
     <java.version>1.8</java.version>
+    <jjwt.version>0.9.1</jjwt.version>
+    <commons-lang.version>2.6</commons-lang.version>
     <knife4j.spring-boot.version>3.0.3</knife4j.spring-boot.version>
     <maven.complier.source>8</maven.complier.source>
     <maven.complier.target>8</maven.complier.target>

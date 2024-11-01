@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.xinran</groupId>
+    <artifactId>hospital</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
+  </parent>
+
+  <artifactId>dahua</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>dahua</name>
+
+  <description>大华</description>
+
+  <properties>
+    <java.version>1.8</java.version>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.xinran</groupId>
+      <artifactId>common</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
+    <!-- ICC鉴权 -->
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-oauth</artifactId>
+      <version>${icc.sdk.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>java-sdk-core</artifactId>
+          <groupId>com.dahuatech.icc</groupId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-core</artifactId>
+      <version>${icc.sdk.version}</version>
+    </dependency>
+    <!-- ICC基础资源SDK -->
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-brm</artifactId>
+      <version>${icc.sdk.version}</version>
+    </dependency>
+    <!-- ICC 事件中心sdk -->
+    <dependency>
+      <groupId>com.dahuatech.icc</groupId>
+      <artifactId>java-sdk-event</artifactId>
+      <version>${icc.sdk.version}</version>
+    </dependency>
+
+  </dependencies>
+
+</project>
