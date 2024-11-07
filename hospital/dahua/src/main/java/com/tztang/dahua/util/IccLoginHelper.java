@@ -9,37 +9,24 @@ import com.dahuatech.icc.oauth.model.v202010.OauthPublicKeyResponse;
 import com.dahuatech.icc.oauth.profile.GrantType;
 import com.dahuatech.icc.util.BeanUtil;
 import com.dahuatech.icc.util.SignUtil;
+import com.tztang.dahua.config.IccConfig;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
 
 @Data
 @Slf4j
 @Component
-@EnableScheduling
 public class IccLoginHelper {
 
-    @Value("${dahua.icc.url}")
-    private String dahuaIccUrl;
-    @Value("${dahua.icc.account}")
-    private String dahuaAccount;
-    @Value("${dahua.icc.password}")
-    private String dahuaPassword;
-    @Value("${dahua.icc.client-id}")
-    private String dahuaClientId;
-    @Value("${dahua.icc.client-secret}")
-    private String dahuaClientSecret;
-    @Value("${dahua.icc.oauth.public-key-url}")
-    private String publicKeyUrl;
-    @Value("${dahua.icc.oauth.user-password-auth-url}")
-    private String userPasswordAuthUrl;
-    @Value("${dahua.icc.oauth.user-password-refresh-token-url}")
-    private String userPasswordRefreshTokenUrl;
+    @Resource
+    private IccConfig iccConfig;
 
     //公钥
     public static String publicKey;
@@ -60,9 +47,8 @@ public class IccLoginHelper {
     }
 
     private void getPublicKey() throws ClientException {
-        log.info("----开始执行----{}------请求地址:{}", "用户密码模式-获取公钥", publicKeyUrl);
-        log.info(dahuaIccUrl + publicKeyUrl);
-        IccHttpHttpRequest pubRequest = new IccHttpHttpRequest(dahuaIccUrl + publicKeyUrl, Method.GET);
+        log.info("----开始执行----{}------请求地址:{}", "用户密码模式-获取公钥", iccConfig.getIccOauth().getPublicKeyUrl());
+        IccHttpHttpRequest pubRequest = new IccHttpHttpRequest(iccConfig.getDahuaIccUrl() + iccConfig.getIccOauth().getPublicKeyUrl(), Method.GET);
         String pubBody = pubRequest.execute();
         OauthPublicKeyResponse keyResp =  BeanUtil.toBean(pubBody, OauthPublicKeyResponse.class);
         log.info("----结束执行----{}------返回报文:{}", "用户密码模式-获取公钥", keyResp);
@@ -74,15 +60,15 @@ public class IccLoginHelper {
      * @throws ClientException
      */
     private void userPasswordAuth() throws ClientException {
-        log.info("----开始执行----{}------请求地址:{}", "用户密码模式-认证申请",userPasswordAuthUrl);
+        log.info("----开始执行----{}------请求地址:{}", "用户密码模式-认证申请", iccConfig.getIccOauth().getUserPasswordAuthUrl());
         Map<String, Object> map = new HashMap();
         map.put("grant_type", "password");
-        map.put("username", dahuaAccount);
-        map.put("password", SignUtil.encryptRSA(dahuaPassword,publicKey));
-        map.put("client_id", dahuaClientId);
-        map.put("client_secret", dahuaClientSecret);
+        map.put("username", iccConfig.getDahuaAccount());
+        map.put("password", SignUtil.encryptRSA(iccConfig.getDahuaPassword(), publicKey));
+        map.put("client_id", iccConfig.getDahuaClientId());
+        map.put("client_secret", iccConfig.getDahuaClientSecret());
         map.put("public_key", publicKey);
-        IccHttpHttpRequest pr = new IccHttpHttpRequest(dahuaIccUrl + userPasswordAuthUrl, Method.POST, JSONUtil.toJsonStr(map));
+        IccHttpHttpRequest pr = new IccHttpHttpRequest(iccConfig.getDahuaIccUrl() + iccConfig.getIccOauth().getUserPasswordAuthUrl(), Method.POST, JSONUtil.toJsonStr(map));
         String prBody = pr.execute();
         IccTokenResponse keyResp = BeanUtil.toBean(prBody, IccTokenResponse.class);
         log.info("----结束执行----{}------返回报文:{}", "用户密码模式-认证申请",keyResp);
@@ -95,13 +81,13 @@ public class IccLoginHelper {
      * @throws ClientException
      */
     private void userPasswordRefreshToken() throws ClientException {
-        log.info("----开始执行----{}------请求地址:{}", "用户密码模式_刷新token",userPasswordRefreshTokenUrl);
+        log.info("----开始执行----{}------请求地址:{}", "用户密码模式_刷新token",iccConfig.getIccOauth().getUserPasswordRefreshTokenUrl());
         Map<String, Object> map = new HashMap();
         map.put("grant_type", GrantType.refresh_token.name());
-        map.put("client_id", dahuaClientId);
-        map.put("client_secret", dahuaClientSecret);
+        map.put("client_id", iccConfig.getDahuaClientId());
+        map.put("client_secret", iccConfig.getDahuaClientSecret());
         map.put("refresh_token", refreshToken);
-        IccHttpHttpRequest pr = new IccHttpHttpRequest(dahuaIccUrl + userPasswordRefreshTokenUrl, Method.POST, JSONUtil.toJsonStr(map));
+        IccHttpHttpRequest pr = new IccHttpHttpRequest(iccConfig.getDahuaIccUrl() + iccConfig.getIccOauth().getUserPasswordRefreshTokenUrl(), Method.POST, JSONUtil.toJsonStr(map));
         String prBody = pr.execute();
         IccTokenResponse keyResp = BeanUtil.toBean(prBody, IccTokenResponse.class);
         log.info("----结束执行----{}------返回报文:{}", "用户密码模式_刷新token",prBody);

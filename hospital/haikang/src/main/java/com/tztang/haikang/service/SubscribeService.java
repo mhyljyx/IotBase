@@ -1,6 +1,6 @@
 package com.tztang.haikang.service;
 
-import com.tztang.util.ApiResponse;
+import com.tztang.common.ApiResponse;
 import com.tztang.haikang.pojo.params.EventSubscribeParams;
 
 /**

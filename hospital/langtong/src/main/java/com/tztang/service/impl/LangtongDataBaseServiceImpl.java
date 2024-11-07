@@ -5,14 +5,14 @@ import com.tztang.config.DataSourceConfig;
 import com.tztang.service.LangtongDataBaseService;
 import com.tztang.service.pojo.params.LangTongDoorPointParams;
 import com.tztang.service.pojo.params.LangTongAccessInfoParams;
-import com.tztang.util.DateUtil;
+import com.tztang.util.DateUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ApiResponseSet;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -29,18 +29,18 @@ public class LangtongDataBaseServiceImpl implements LangtongDataBaseService {
   public List<LangTongDoorPointParams> readLangTongDoorPoint() {
     Connection conn = null;
     PreparedStatement prep = null;
-    ApiResponseSet ApiResponseSet = null;
+    ResultSet resultSet = null;
     List<LangTongDoorPointParams> doorPointList = new ArrayList<>();
     try {
       conn = dataSourceConfig.createConn();
       // 创建PreparedStatement对象
       prep = conn.prepareStatement("select EquptID,EquptName,EquptStatus from Equipment");
       // 执行查询
-      ApiResponseSet = prep.executeQuery();
-      while (ApiResponseSet.next()) {
+      resultSet = prep.executeQuery();
+      while (resultSet.next()) {
         LangTongDoorPointParams doorPoint = new LangTongDoorPointParams();
-        doorPoint.setSrcIndex(ApiResponseSet.getString("EquptID"));
-        doorPoint.setName(ApiResponseSet.getString("EquptName"));
+        doorPoint.setSrcIndex(resultSet.getString("EquptID"));
+        doorPoint.setName(resultSet.getString("EquptName"));
         doorPointList.add(doorPoint);
       }
     } catch (SQLException | ClassNotFoundException e) {
@@ -49,7 +49,7 @@ public class LangtongDataBaseServiceImpl implements LangtongDataBaseService {
     } finally {
       // 关闭资源
       try {
-        if (ApiResponseSet != null) ApiResponseSet.close();
+        if (resultSet != null) resultSet.close();
         if (prep != null) prep.close();
         if (conn != null) conn.close();
       } catch (SQLException e) {
@@ -62,7 +62,7 @@ public class LangtongDataBaseServiceImpl implements LangtongDataBaseService {
   public List<LangTongAccessInfoParams> readLangTongAccessInfo(Date dateTime) {
     Connection conn = null;
     PreparedStatement prep = null;
-    ApiResponseSet ApiResponseSet = null;
+    ResultSet resultSet = null;
     List<LangTongAccessInfoParams> accessInfoList = new ArrayList<>();
     try {
       conn = dataSourceConfig.createConn();
@@ -77,17 +77,17 @@ public class LangtongDataBaseServiceImpl implements LangtongDataBaseService {
       if (ObjectUtil.isNull(dateTime)) {
         return accessInfoList;
       }
-      prep.setString(1, DateUtil.formatDateTime(DateUtil.date(dateTime.getTime() + 1000)));
-      prep.setString(1, DateUtil.formatDateTime(DateUtil.beginOfDay(DateUtil.date())));
+      prep.setString(1, DateUtils.formatDateTime(DateUtils.date(dateTime.getTime() + 1000)));
+      prep.setString(1, DateUtils.formatDateTime(DateUtils.beginOfDay(DateUtils.date())));
       //执行查询
-      ApiResponseSet = prep.executeQuery();
-      while (ApiResponseSet.next()) {
+      resultSet = prep.executeQuery();
+      while (resultSet.next()) {
         LangTongAccessInfoParams accessInfo = new LangTongAccessInfoParams();
-        accessInfo.setUserId(ApiResponseSet.getString("PersonnelID"));
-        accessInfo.setUserName(ApiResponseSet.getString("PName"));
-        accessInfo.setSrcIndex(ApiResponseSet.getString("EquptID"));
-        accessInfo.setPassTime(DateUtil.transTimeToUTCDate(ApiResponseSet.getString("datetime")));
-        accessInfo.setPortNum(Integer.parseInt(ApiResponseSet.getString("PortNum")));
+        accessInfo.setUserId(resultSet.getString("PersonnelID"));
+        accessInfo.setUserName(resultSet.getString("PName"));
+        accessInfo.setSrcIndex(resultSet.getString("EquptID"));
+        accessInfo.setPassTime(DateUtils.transTimeToUTCDate(resultSet.getString("datetime")));
+        accessInfo.setPortNum(Integer.parseInt(resultSet.getString("PortNum")));
         accessInfoList.add(accessInfo);
       }
     } catch (SQLException | ClassNotFoundException | ParseException e) {
@@ -96,7 +96,7 @@ public class LangtongDataBaseServiceImpl implements LangtongDataBaseService {
     } finally {
       // 关闭资源
       try {
-        if (ApiResponseSet != null) ApiResponseSet.close();
+        if (resultSet != null) resultSet.close();
         if (prep != null) prep.close();
         if (conn != null) conn.close();
       } catch (SQLException e) {
