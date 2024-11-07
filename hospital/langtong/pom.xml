@@ -4,7 +4,7 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.xinran</groupId>
+    <groupId>com.tztang</groupId>
     <artifactId>hospital</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
@@ -30,12 +30,6 @@
       <groupId>com.microsoft.sqlserver</groupId>
       <artifactId>mssql-jdbc</artifactId>
       <version>9.2.1.jre8</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.xinran</groupId>
-      <artifactId>common</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
     </dependency>
 
     <dependency>

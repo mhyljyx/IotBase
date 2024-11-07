@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
 
   <parent>
-    <groupId>com.xinran</groupId>
-    <artifactId>IoTBase</artifactId>
+    <groupId>com.tztang</groupId>
+    <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
   </parent>
@@ -23,5 +23,13 @@
     <module>langtong</module>
     <module>boshi-udp-server</module>
   </modules>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.tztang</groupId>
+      <artifactId>service-common</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+  </dependencies>
 
 </project>

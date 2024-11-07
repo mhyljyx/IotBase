@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tztang.dahua.mapper.EventSubscribeMapper">
+
+    <sql id="event_subscribe">
+        id,
+        `name`,
+        category,
+        ip,
+        port,
+        status,
+        update_time,
+        create_time
+    </sql>
+
+    <resultMap id="eventSubscribeQueryMap" type="com.tztang.dahua.pojo.vo.EventSubscribeQueryVo">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="category" property="category" />
+        <result column="ip" property="ip" />
+        <result column="port" property="port" />
+        <result column="status" property="status" />
+        <result column="grade" property="grade" />
+        <result column="node_code" property="nodeCode" />
+        <result column="type" property="type" />
+    </resultMap>
+
+    <select id="eventSubscribeQuery" resultMap="eventSubscribeQueryMap">
+        SELECT
+            <include refid="event_subscribe"/>
+            `type`,
+            node_code,
+            grade
+        FROM
+            event_subscribe event_subscribe
+        LEFT JOIN event_subscribe_grade event_subscribe_grade ON event_subscribe.name = event_subscribe_grade.subscribe_name
+        LEFT JOIN event_subscribe_node_code event_subscribe_node_code ON event_subscribe.name = event_subscribe_node_code.subscribe_name
+        LEFT JOIN event_subscribe_type event_subscribe_type ON event_subscribe.name = event_subscribe_type.subscribe_name
+        <where>
+            event_subscribe.is_del = '0'
+            <if test="dto.categories != null and dto.categories.size > 0 ">
+                event_subscribe.category IN
+                <foreach collection="categories" item="category" open="(" separator="," close=")">
+                    #{category}
+                </foreach>
+            </if>
+        </where>
+        ORDER BY event_subscribe.create_time DESC
+    </select>
+
+</mapper>

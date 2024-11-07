@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.xinran</groupId>
-    <artifactId>IoTBase</artifactId>
+    <groupId>com.tztang</groupId>
+    <artifactId>demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
   </parent>
@@ -40,11 +40,6 @@
       <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <dependency>
-      <groupId>com.github.xiaoymin</groupId>
-      <artifactId>knife4j-spring-boot-starter</artifactId>
-      <version>${knife4j.spring-boot.version}</version>
-    </dependency>
-    <dependency>
       <groupId>javax.validation</groupId>
       <artifactId>validation-api</artifactId>
     </dependency>
@@ -59,10 +54,11 @@
       <version>${commons-lang.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-test</artifactId>
-      <scope>test</scope>
+      <groupId>com.github.xiaoymin</groupId>
+      <artifactId>knife4j-openapi2-spring-boot-starter</artifactId>
+      <version>${knife4j.spring-boot.version}</version>
     </dependency>
+
   </dependencies>
 
 </project>

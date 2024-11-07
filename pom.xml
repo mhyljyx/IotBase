@@ -3,15 +3,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.xinran</groupId>
-  <artifactId>IoTBase</artifactId>
+  <groupId>com.tztang</groupId>
+  <artifactId>demo</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>IoTBase</name>
-  <description>物联网底座</description>
+  <name>demo</name>
+  <description>demo</description>
 
   <packaging>pom</packaging>
 
   <modules>
+    <module>service-common</module>
     <module>common</module>
     <module>hospital</module>
     <module>thread-pool</module>
@@ -20,8 +21,12 @@
   <properties>
     <java.version>1.8</java.version>
     <jjwt.version>0.9.1</jjwt.version>
+    <snakeyaml.version>1.33</snakeyaml.version>
+    <pagehelper.version>5.2.0</pagehelper.version>
     <commons-lang.version>2.6</commons-lang.version>
-    <knife4j.spring-boot.version>3.0.3</knife4j.spring-boot.version>
+    <mybatis-plus.version>3.5.3.2</mybatis-plus.version>
+    <shardingsphere.version>5.3.2</shardingsphere.version>
+    <knife4j.spring-boot.version>4.4.0</knife4j.spring-boot.version>
     <maven.complier.source>8</maven.complier.source>
     <maven.complier.target>8</maven.complier.target>
     <spring-boot.version>2.7.1</spring-boot.version>
@@ -46,6 +51,11 @@
       <groupId>com.alibaba.fastjson2</groupId>
       <artifactId>fastjson2</artifactId>
       <version>${fastJson2.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
 

@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.xinran.filter.FilterConfig
+  com.tztang.filter.FilterConfig

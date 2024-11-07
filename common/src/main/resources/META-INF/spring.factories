@@ -1,0 +1,6 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.tztang.config.DemoCommonAutoConfig
+org.springframework.boot.env.EnvironmentPostProcessor=\
+  com.tztang.environment.SpringEnvironment
+org.springframework.context.ApplicationContextInitializer=\
+  com.tztang.core.SpringUtil

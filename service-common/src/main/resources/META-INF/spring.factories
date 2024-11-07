@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.tztang.swagger.SwaggerConfiguration,\
+  com.tztang.mybatisplus.MybatisPlusAutoConfiguration,\
+  com.tztang.exception.DefaultExceptionHandler
