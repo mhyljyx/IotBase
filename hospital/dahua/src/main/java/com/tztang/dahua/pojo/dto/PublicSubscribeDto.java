@@ -30,4 +30,22 @@ public class PublicSubscribeDto {
   @NotBlank(message = "订阅名称不能为空")
   private String name;
 
+  /**
+   * 接收地址(写死)
+   * /dahua/receive/api/eventMsg 事件接收地址
+   * /dahua/receive/api/businessMsg 业务接收地址
+   * /dahua/receive/api/deviceStatusMsg 设备状态接收地址
+   */
+  @NotBlank(message = "接收地址不能为空")
+  private String receiveUri;
+
+  /**
+   * 标签
+   * 例如：报警事件标签 alarm_event
+   *      业务事件标签 business_event
+   *      设备状态标签 device_status
+   */
+  @NotBlank(message = "标签不能为空")
+  private String sign;
+
 }

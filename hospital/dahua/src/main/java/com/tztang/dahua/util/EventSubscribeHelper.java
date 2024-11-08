@@ -33,8 +33,8 @@ public class EventSubscribeHelper {
   public IccResponse subscribeEvent(EventSubscribeDto params) throws ClientException {
     List<EventDto> eventDtos = new ArrayList<>();
     eventDtos.add(buildEvent(params));
-    String alarmMonitor = "http://" + params.getReceiveIp() + ":" + params.getReceivePort() + "/dahua/eventMsg/receive";
-    String magic = params.getReceiveIp() + "_" + params.getReceivePort();
+    String alarmMonitor = "http://" + params.getReceiveIp() + ":" + params.getReceivePort() + params.getReceiveUri();
+    String magic = params.getReceiveIp() + "_" + params.getReceivePort() + "_" + params.getSign();
     if (StrUtil.isBlank(params.getName())) {
       params.setName(magic);
     }

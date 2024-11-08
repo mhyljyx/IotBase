@@ -69,6 +69,7 @@ public class SubscribeServiceImpl implements SubscribeService {
     eventSubscribeDto.setCategory(EventCategoryEnums.alarm.code);
     eventSubscribeDto.setTypes(TypeFireAlarmEnums.getCodes());
     eventSubscribeDto.setName(dto.getName());
+    eventSubscribeDto.setReceiveUri("/dahua/receive/api/eventMsg");
     if (!addEventSubscribe(eventSubscribeDto)) {
       return ApiResponse.error("事件订阅名称重复");
     }
@@ -88,6 +89,27 @@ public class SubscribeServiceImpl implements SubscribeService {
     eventSubscribeDto.setCategory(EventCategoryEnums.business.code);
     eventSubscribeDto.setTypes(TypeSecurityBusinessEnums.getCodes());
     eventSubscribeDto.setName(dto.getName());
+    eventSubscribeDto.setReceiveUri("/dahua/receive/api/businessMsg");
+    if (!addEventSubscribe(eventSubscribeDto)) {
+      return ApiResponse.error("事件订阅名称重复");
+    }
+    IccResponse res = eventSubscribeHelper.subscribeEvent(eventSubscribeDto);
+    log.info("安检业务事件订阅:{}", res.toString());
+    if (!"0".equals(res.getCode())) {
+      return ApiResponse.error(res.getErrMsg());
+    }
+    return ApiResponse.ok(res.getResult());
+  }
+
+  @Override
+  public ApiResponse<String> deviceStatusSubscribe(PublicSubscribeDto dto) throws ClientException {
+    EventSubscribeDto eventSubscribeDto = new EventSubscribeDto();
+    eventSubscribeDto.setReceiveIp(dto.getReceiveIp());
+    eventSubscribeDto.setReceivePort(dto.getReceivePort());
+    eventSubscribeDto.setCategory(EventCategoryEnums.state.code);
+    eventSubscribeDto.setTypes(TypeSecurityBusinessEnums.getCodes());
+    eventSubscribeDto.setName(dto.getName());
+    eventSubscribeDto.setReceiveUri("/dahua/receive/api/deviceStatusMsg");
     if (!addEventSubscribe(eventSubscribeDto)) {
       return ApiResponse.error("事件订阅名称重复");
     }

@@ -46,6 +46,12 @@ public class EventSubscribeController {
         return subscribeService.securityBusinessSubscribe(params);
     }
 
+    @ApiOperation("设备状态信息订阅")
+    @PostMapping("deviceStatusSubscribe")
+    public ApiResponse<String> deviceStatusSubscribe(@Valid @RequestBody PublicSubscribeDto params) throws ClientException {
+        return subscribeService.deviceStatusSubscribe(params);
+    }
+
     @ApiOperation("事件订阅查询")
     @PostMapping("eventSubscribeQuery")
     public ApiResponse<PageVo<EventSubscribeQueryVo>> eventSubscribeQuery(@Valid @RequestBody EventSubscribeQueryDto params) {

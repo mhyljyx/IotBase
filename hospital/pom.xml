@@ -18,6 +18,8 @@
   <packaging>pom</packaging>
 
   <modules>
+    <module>security-platform</module>
+    <module>fire-platform</module>
     <module>dahua</module>
     <module>haikang</module>
     <module>langtong</module>

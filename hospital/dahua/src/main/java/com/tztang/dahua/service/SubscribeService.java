@@ -24,6 +24,9 @@ public interface SubscribeService {
   //安检业务订阅
   ApiResponse<String> securityBusinessSubscribe(PublicSubscribeDto dto) throws ClientException;
 
+  //设备状态信息订阅
+  ApiResponse<String> deviceStatusSubscribe(PublicSubscribeDto dto) throws ClientException;
+
   //事件订阅查询
   ApiResponse<PageVo<EventSubscribeQueryVo>> eventSubscribeQuery(EventSubscribeQueryDto dto);
 
