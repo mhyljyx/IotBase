@@ -1,5 +1,6 @@
 package com.tztang.service.impl;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.tztang.config.DataSourceConfig;
 import com.tztang.service.LangtongDataBaseService;
@@ -77,8 +78,8 @@ public class LangtongDataBaseServiceImpl implements LangtongDataBaseService {
       if (ObjectUtil.isNull(dateTime)) {
         return accessInfoList;
       }
-      prep.setString(1, DateUtils.formatDateTime(DateUtils.date(dateTime.getTime() + 1000)));
-      prep.setString(1, DateUtils.formatDateTime(DateUtils.beginOfDay(DateUtils.date())));
+      prep.setString(1, DateUtils.formatDateTime(DateUtils.parse(dateTime.getTime() + 1000)));
+      prep.setString(1, DateUtils.formatDateTime(DateUtils.getDateStart(DateUtils.now())));
       //执行查询
       resultSet = prep.executeQuery();
       while (resultSet.next()) {
@@ -86,11 +87,11 @@ public class LangtongDataBaseServiceImpl implements LangtongDataBaseService {
         accessInfo.setUserId(resultSet.getString("PersonnelID"));
         accessInfo.setUserName(resultSet.getString("PName"));
         accessInfo.setSrcIndex(resultSet.getString("EquptID"));
-        accessInfo.setPassTime(DateUtils.transTimeToUTCDate(resultSet.getString("datetime")));
+        accessInfo.setPassTime(DateUtils.formatTimeZone(DateUtils.parseDateTime(resultSet.getString("datetime"))));
         accessInfo.setPortNum(Integer.parseInt(resultSet.getString("PortNum")));
         accessInfoList.add(accessInfo);
       }
-    } catch (SQLException | ClassNotFoundException | ParseException e) {
+    } catch (SQLException | ClassNotFoundException e) {
       e.printStackTrace();
       log.error(e.getMessage());
     } finally {

@@ -1,9 +1,8 @@
 package com.tztang;
 
-
-import com.damai.base.BaseThreadPool;
-import com.damai.namefactory.BusinessNameThreadFactory;
-import com.damai.rejectedexecutionhandler.ThreadPoolRejectedExecutionHandler;
+import com.tztang.base.BaseThreadPool;
+import com.tztang.namefactory.BusinessNameThreadFactory;
+import com.tztang.rejectedexecutionhandler.ThreadPoolRejectedExecutionHandler;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

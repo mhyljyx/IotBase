@@ -1,6 +1,6 @@
 package com.tztang.base;
 
-import com.damai.threadlocal.BaseParameterHolder;
+import com.tztang.threadlocal.BaseParameterHolder;
 import org.slf4j.MDC;
 
 import java.util.HashMap;

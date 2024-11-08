@@ -98,6 +98,8 @@ public class DateUtils {
     public static final String FORMAT_NO_MILLISECOND = "yyyyMMddHHmmssSSS";
     
     public static final String FORMAT_UTC = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+
+    public static final String FORMAT_TIME_ZONE = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX";
     
     /**
      * 获取北京当前时间
@@ -179,14 +181,25 @@ public class DateUtils {
      * 将 Date 格式时间转化为 yyyy-MM-dd HH:mm:ss 格式时间
      *
      * @param date Date 格式时间
-     * @return yyyy-MM-dd HH:mm:ss 格式时间（如：2022-06-17 16:06:17）
+     * @return yyyy-MM-dd'T'HH:mm:ss.SSS'Z' 格式时间（如：2024-11-08T08:58:09.783Z）
      */
     public static String formatUtcTime(Date date) {
         SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_UTC);
         sdf.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
         return sdf.format(date);
     }
-    
+
+    /**
+     * 将 dateTime 格式时间转化为 yyyy-MM-dd'T'HH:mm:ss.SSSXXX 格式时间
+     *
+     * @param dateTime Date 格式时间
+     * @return yyyy-MM-dd'T'HH:mm:ss.SSSXXX 格式时间（如：2023-12-28T10:41:02+08:00）
+     */
+    public static String formatTimeZone(Date dateTime) {
+        SimpleDateFormat sdf = new SimpleDateFormat(FORMAT_TIME_ZONE);
+        return sdf.format(dateTime);
+    }
+
     /**
      * 将 yyyy-MM-dd 格式时间转化为 Date 格式时间
      * 
@@ -291,7 +304,7 @@ public class DateUtils {
      * 获取一天的截止时间（即：23 点 59 分 59 秒 999 毫秒）
      * 
      * @param date 指定时间
-     * @return 当天的开始时间
+     * @return 当天的结束时间
      */
     public static Date getDateEnd(Date date) {
         if (Objects.isNull(date)) {
