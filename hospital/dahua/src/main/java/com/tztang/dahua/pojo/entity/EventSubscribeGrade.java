@@ -1,8 +1,6 @@
 package com.tztang.dahua.pojo.entity;
 
 import java.io.Serializable;
-
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
@@ -11,13 +9,14 @@ import io.swagger.annotations.ApiModelProperty;
 /**
  * @description  事件订阅报警关联表 
  * @author  tztang
- * @Date 2024-11-07
+ * @Date 2024-11-14
  */
 @Data
-@TableName("event_subscribe_grade")
+@NoArgsConstructor
+@AllArgsConstructor
 public class EventSubscribeGrade  implements Serializable {
 
-	private static final long serialVersionUID =  9123363065922232910L;
+	private static final long serialVersionUID =  4684970657001480092L;
 
 	/**
 	 * 事件订阅名称

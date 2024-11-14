@@ -1,4 +1,4 @@
-package com.tztang.dahua.pojo.entity;
+package com.tztang.pojo.entity;
 
 import java.io.Serializable;
 import lombok.Data;
@@ -9,48 +9,58 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * @description  事件订阅表 
+ * @description  故障信息表 
  * @author  tztang
  * @Date 2024-11-14
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventSubscribe  implements Serializable {
+public class Fault  implements Serializable {
 
-	private static final long serialVersionUID =  2189062502296781060L;
-
-	private Integer id;
+	private static final long serialVersionUID =  4405762322642899142L;
 
 	/**
-	 * 事件订阅名称
+	 * 故障事件唯一编码
 	 */
-	private String name;
+	private String id;
 
 	/**
-	 * 事件大类
+	 * 事件源类型
 	 */
-	private String category;
+	private Integer deviceCategory;
 
 	/**
-	 * 接收方ip
+	 * 事件源编码
 	 */
-	private String ip;
+	private String deviceId;
 
 	/**
-	 * 接收方port
+	 * 运营服务机
+构唯一编码
 	 */
-	private Integer port;
+	private String parentId;
 
 	/**
-	 * 0未取消 1已取消
+	 * 故障类型
 	 */
-	private Integer status;
+	private Integer type;
 
 	/**
-	 * 订阅平台
+	 * 事件发生时间
 	 */
-	private String platform;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+	private Date eventTime;
+
+	/**
+	 * 故障发生位置
+	 */
+	private String location;
+
+	/**
+	 * 故障原因
+	 */
+	private String reason;
 
 	/**
 	 * 更新时间

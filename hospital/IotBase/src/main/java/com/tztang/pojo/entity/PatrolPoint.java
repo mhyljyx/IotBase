@@ -1,4 +1,4 @@
-package com.tztang.dahua.pojo.entity;
+package com.tztang.pojo.entity;
 
 import java.io.Serializable;
 import lombok.Data;
@@ -9,48 +9,42 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * @description  事件订阅表 
+ * @description  巡更点位 
  * @author  tztang
  * @Date 2024-11-14
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventSubscribe  implements Serializable {
+public class PatrolPoint  implements Serializable {
 
-	private static final long serialVersionUID =  2189062502296781060L;
-
-	private Integer id;
+	private static final long serialVersionUID =  1301844423239037577L;
 
 	/**
-	 * 事件订阅名称
+	 * 巡更点位
+	 */
+	private String id;
+
+	/**
+	 * 巡更点位名称
 	 */
 	private String name;
 
 	/**
-	 * 事件大类
+	 * 运营服务机
+构唯一编码
 	 */
-	private String category;
+	private String parentId;
 
 	/**
-	 * 接收方ip
+	 * 巡检点位类型
 	 */
-	private String ip;
+	private String pointType;
 
 	/**
-	 * 接收方port
+	 * 关联编码
 	 */
-	private Integer port;
-
-	/**
-	 * 0未取消 1已取消
-	 */
-	private Integer status;
-
-	/**
-	 * 订阅平台
-	 */
-	private String platform;
+	private String relationId;
 
 	/**
 	 * 更新时间

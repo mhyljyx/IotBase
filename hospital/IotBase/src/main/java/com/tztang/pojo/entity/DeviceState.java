@@ -1,4 +1,4 @@
-package com.tztang.dahua.pojo.entity;
+package com.tztang.pojo.entity;
 
 import java.io.Serializable;
 import lombok.Data;
@@ -9,48 +9,52 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * @description  事件订阅表 
+ * @description  运行状态表 
  * @author  tztang
  * @Date 2024-11-14
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EventSubscribe  implements Serializable {
+public class DeviceState  implements Serializable {
 
-	private static final long serialVersionUID =  2189062502296781060L;
-
-	private Integer id;
+	private static final long serialVersionUID =  5742601669850194532L;
 
 	/**
-	 * 事件订阅名称
+	 * 事件唯一编码
 	 */
-	private String name;
+	private String id;
 
 	/**
-	 * 事件大类
+	 * 事件源类型
 	 */
-	private String category;
+	private Integer deviceCategory;
 
 	/**
-	 * 接收方ip
+	 * 事件源编码
 	 */
-	private String ip;
+	private String deviceId;
 
 	/**
-	 * 接收方port
+	 * 运营服务机构唯一编码
 	 */
-	private Integer port;
+	private String parentId;
 
 	/**
-	 * 0未取消 1已取消
+	 * 在离线状态 0-离线，1-在线
 	 */
-	private Integer status;
+	private Integer onlineStatus;
 
 	/**
-	 * 订阅平台
+	 * 运行状态 0-离线，1-在线
 	 */
-	private String platform;
+	private Integer workStatus;
+
+	/**
+	 * 事件发生时间
+	 */
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+	private Date eventTime;
 
 	/**
 	 * 更新时间
