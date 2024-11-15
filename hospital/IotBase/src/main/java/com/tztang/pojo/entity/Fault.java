@@ -11,17 +11,18 @@ import java.util.Date;
 /**
  * @description  故障信息表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Fault  implements Serializable {
 
-	private static final long serialVersionUID =  4405762322642899142L;
+	private static final long serialVersionUID =  4320310518723883240L;
 
 	/**
-	 * 故障事件唯一编码
+	 * 故障事件唯
+一编码
 	 */
 	private String id;
 

@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  故障处理信息表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class FaultProcess  implements Serializable {
 
-	private static final long serialVersionUID =  4120242902853968180L;
+	private static final long serialVersionUID =  5614916655973367605L;
 
 	/**
 	 * 与故障信息上报时编码一致
@@ -36,7 +36,8 @@ public class FaultProcess  implements Serializable {
 	private String deviceId;
 
 	/**
-	 * 运营服务机构唯一编码
+	 * 运营服务机
+构唯一编码
 	 */
 	private String parentId;
 

@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  事件预警处置信息 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class WarningProcess  implements Serializable {
 
-	private static final long serialVersionUID =  8218980721904248382L;
+	private static final long serialVersionUID =  9210635006499699228L;
 
 	/**
 	 * 事件预警事件唯一编码

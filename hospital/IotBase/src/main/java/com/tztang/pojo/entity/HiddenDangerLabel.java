@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  巡更隐患信息表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class HiddenDangerLabel  implements Serializable {
 
-	private static final long serialVersionUID =  4480657690770598517L;
+	private static final long serialVersionUID =  4986710696867840216L;
 
 	/**
 	 * 事件id

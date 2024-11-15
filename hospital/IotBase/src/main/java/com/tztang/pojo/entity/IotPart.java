@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  部件表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class IotPart  implements Serializable {
 
-	private static final long serialVersionUID =  5283091312483657464L;
+	private static final long serialVersionUID =  3935099545278035338L;
 
 	/**
 	 * 部件唯一编号

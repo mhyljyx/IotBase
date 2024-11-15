@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  互联网单位信息表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Community  implements Serializable {
 
-	private static final long serialVersionUID =  3587013592777793642L;
+	private static final long serialVersionUID =  7150876233522701842L;
 
 	private Integer id;
 

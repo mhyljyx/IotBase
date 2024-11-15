@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  火灾预警处置信息 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class FireAlarmProcess  implements Serializable {
 
-	private static final long serialVersionUID =  4018502526672625499L;
+	private static final long serialVersionUID =  230297387072779298L;
 
 	/**
 	 * 火灾预警事件唯一编码

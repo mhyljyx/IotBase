@@ -9,42 +9,48 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * @description  巡更点位 
+ * @description  事件订阅表 
  * @author  tztang
  * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatrolPoint  implements Serializable {
+public class EventSubscribe  implements Serializable {
 
-	private static final long serialVersionUID =  3965355887826372706L;
+	private static final long serialVersionUID =  3270385936465538299L;
 
-	/**
-	 * 巡更点位
-	 */
-	private String id;
+	private Integer id;
 
 	/**
-	 * 巡更点位名称
+	 * 事件订阅名称
 	 */
 	private String name;
 
 	/**
-	 * 运营服务机
-构唯一编码
+	 * 事件大类
 	 */
-	private String parentId;
+	private String category;
 
 	/**
-	 * 巡检点位类型
+	 * 接收方ip
 	 */
-	private String pointType;
+	private String ip;
 
 	/**
-	 * 关联编码
+	 * 接收方port
 	 */
-	private String relationId;
+	private Integer port;
+
+	/**
+	 * 0未取消 1已取消
+	 */
+	private Integer status;
+
+	/**
+	 * 订阅平台
+	 */
+	private String platform;
 
 	/**
 	 * 更新时间

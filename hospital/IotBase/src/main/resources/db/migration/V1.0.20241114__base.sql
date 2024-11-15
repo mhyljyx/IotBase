@@ -11,7 +11,7 @@
  Target Server Version : 50742
  File Encoding         : 65001
 
- Date: 14/11/2024 17:41:25
+ Date: 15/11/2024 17:58:27
 */
 
 SET NAMES utf8mb4;
@@ -48,6 +48,26 @@ CREATE TABLE `community`  (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for dept
+-- ----------------------------
+DROP TABLE IF EXISTS `dept`;
+CREATE TABLE `dept`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门id',
+  `open_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地方三方部门id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '部门名称',
+  `parent_id` int(11) NULL DEFAULT NULL COMMENT '父级部门id',
+  `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of dept
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for device_state
 -- ----------------------------
 DROP TABLE IF EXISTS `device_state`;
@@ -63,7 +83,7 @@ CREATE TABLE `device_state`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '运行状态表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '运行状态表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of device_state
@@ -86,7 +106,7 @@ CREATE TABLE `event_subscribe`  (
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `event_subscribe_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of event_subscribe
@@ -97,9 +117,14 @@ CREATE TABLE `event_subscribe`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `event_subscribe_grade`;
 CREATE TABLE `event_subscribe_grade`  (
+  `subscribe_id` int(11) NOT NULL COMMENT '事件订阅id一致',
   `subscribe_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '事件订阅名称',
-  `grade` int(1) NOT NULL COMMENT '告警等级'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅报警关联表' ROW_FORMAT = Dynamic;
+  `grade` int(1) NOT NULL COMMENT '告警等级',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`subscribe_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅报警关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of event_subscribe_grade
@@ -110,9 +135,14 @@ CREATE TABLE `event_subscribe_grade`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `event_subscribe_node_code`;
 CREATE TABLE `event_subscribe_node_code`  (
+  `subscribe_id` int(11) NOT NULL COMMENT '事件订阅id一致',
   `subscribe_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '事件订阅名称',
-  `node_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备或者通道编号'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅（设备||通道）关联表' ROW_FORMAT = Dynamic;
+  `node_code` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '设备或者通道编号',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`subscribe_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅（设备||通道）关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of event_subscribe_node_code
@@ -123,9 +153,14 @@ CREATE TABLE `event_subscribe_node_code`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `event_subscribe_org`;
 CREATE TABLE `event_subscribe_org`  (
+  `subscribe_id` int(11) NOT NULL COMMENT '事件订阅id一致',
   `subscribe_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '事件订阅名称',
-  `org` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织代码'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅组织关联表' ROW_FORMAT = Dynamic;
+  `org` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组织代码',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`subscribe_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅组织关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of event_subscribe_org
@@ -136,9 +171,14 @@ CREATE TABLE `event_subscribe_org`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `event_subscribe_type`;
 CREATE TABLE `event_subscribe_type`  (
+  `subscribe_id` int(11) NOT NULL COMMENT '事件订阅id一致',
   `subscribe_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '事件订阅名称',
-  `type` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '事件类型'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅类型关联表' ROW_FORMAT = Dynamic;
+  `type` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '事件类型',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`subscribe_id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件订阅类型关联表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of event_subscribe_type
@@ -161,7 +201,7 @@ CREATE TABLE `fault`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '故障信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '故障信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of fault
@@ -184,7 +224,7 @@ CREATE TABLE `fault_process`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '故障处理信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '故障处理信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of fault_process
@@ -208,7 +248,7 @@ CREATE TABLE `fire_alarm`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '火灾预警信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '火灾预警信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of fire_alarm
@@ -237,11 +277,36 @@ CREATE TABLE `fire_alarm_process`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '火灾预警处置信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '火灾预警处置信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of fire_alarm_process
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for flyway_schema_history
+-- ----------------------------
+DROP TABLE IF EXISTS `flyway_schema_history`;
+CREATE TABLE `flyway_schema_history`  (
+  `installed_rank` int(11) NOT NULL,
+  `version` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `script` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `checksum` int(11) NULL DEFAULT NULL,
+  `installed_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `installed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `execution_time` int(11) NOT NULL,
+  `success` tinyint(1) NOT NULL,
+  PRIMARY KEY (`installed_rank`) USING BTREE,
+  INDEX `flyway_schema_history_s_idx`(`success`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of flyway_schema_history
+-- ----------------------------
+INSERT INTO `flyway_schema_history` VALUES (1, '1', '<< Flyway Baseline >>', 'BASELINE', '<< Flyway Baseline >>', NULL, 'root', '2024-11-14 17:44:26', 0, 1);
+INSERT INTO `flyway_schema_history` VALUES (2, '1.0.20241114', 'base', 'SQL', 'V1.0.20241114__base.sql', -1405947239, 'root', '2024-11-14 17:44:33', 6654, 1);
 
 -- ----------------------------
 -- Table structure for hidden_danger_label
@@ -262,7 +327,7 @@ CREATE TABLE `hidden_danger_label`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '巡更隐患信息表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '巡更隐患信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of hidden_danger_label
@@ -299,7 +364,7 @@ CREATE TABLE `iot_device`  (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '物联设备表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '物联设备表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of iot_device
@@ -332,7 +397,7 @@ CREATE TABLE `iot_part`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部件表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部件表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of iot_part
@@ -352,7 +417,7 @@ CREATE TABLE `patrol_point`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '巡更点位' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '巡更点位' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of patrol_point
@@ -383,7 +448,7 @@ CREATE TABLE `patrol_record`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '巡更记录表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '巡更记录表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of patrol_record
@@ -396,7 +461,7 @@ DROP TABLE IF EXISTS `platform_dictionary`;
 CREATE TABLE `platform_dictionary`  (
   `sign` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '平台标识',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '平台名称'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订阅平台' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '订阅平台' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of platform_dictionary
@@ -425,10 +490,32 @@ CREATE TABLE `serviceagency`  (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除'
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消防物联网运营服务机构表' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消防物联网运营服务机构表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of serviceagency
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for user
+-- ----------------------------
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user`  (
+  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户姓名',
+  `sex` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '性别 0女 1男 9未知',
+  `id_number` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证信息',
+  `mobile_phone` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号',
+  `phone` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '座机号',
+  `address` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user
 -- ----------------------------
 
 -- ----------------------------
@@ -447,7 +534,7 @@ CREATE TABLE `warning`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件预警信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件预警信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of warning
@@ -476,7 +563,7 @@ CREATE TABLE `warning_process`  (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` int(1) NOT NULL DEFAULT 0 COMMENT '0:正常 1:删除',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件预警处置信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '事件预警处置信息' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of warning_process

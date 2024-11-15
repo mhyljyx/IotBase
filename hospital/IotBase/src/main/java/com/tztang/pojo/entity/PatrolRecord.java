@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  巡更记录表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class PatrolRecord  implements Serializable {
 
-	private static final long serialVersionUID =  6527660018975637754L;
+	private static final long serialVersionUID =  1381505556804047247L;
 
 	/**
 	 * 任务唯一id

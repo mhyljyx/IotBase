@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  消防物联网运营服务机构表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Serviceagency  implements Serializable {
 
-	private static final long serialVersionUID =  7282638515382571365L;
+	private static final long serialVersionUID =  6413255241655641495L;
 
 	/**
 	 * 运营服务机

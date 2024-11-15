@@ -9,42 +9,51 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * @description  巡更点位 
+ * @description  用户信息表 
  * @author  tztang
  * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PatrolPoint  implements Serializable {
+public class User  implements Serializable {
 
-	private static final long serialVersionUID =  3965355887826372706L;
+	private static final long serialVersionUID =  2301310286348125498L;
 
 	/**
-	 * 巡更点位
+	 * 用户id
 	 */
 	private String id;
 
 	/**
-	 * 巡更点位名称
+	 * 用户姓名
 	 */
 	private String name;
 
 	/**
-	 * 运营服务机
-构唯一编码
+	 * 性别 0女 1男 9未知
 	 */
-	private String parentId;
+	private String sex;
 
 	/**
-	 * 巡检点位类型
+	 * 身份证信息
 	 */
-	private String pointType;
+	private String idNumber;
 
 	/**
-	 * 关联编码
+	 * 手机号
 	 */
-	private String relationId;
+	private String mobilePhone;
+
+	/**
+	 * 座机号
+	 */
+	private String phone;
+
+	/**
+	 * 地址
+	 */
+	private String address;
 
 	/**
 	 * 更新时间

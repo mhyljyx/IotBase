@@ -11,14 +11,14 @@ import java.util.Date;
 /**
  * @description  运行状态表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-15
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class DeviceState  implements Serializable {
 
-	private static final long serialVersionUID =  5742601669850194532L;
+	private static final long serialVersionUID =  8707108810120995117L;
 
 	/**
 	 * 事件唯一编码
