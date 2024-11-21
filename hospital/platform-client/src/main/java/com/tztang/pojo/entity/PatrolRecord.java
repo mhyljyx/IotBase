@@ -1,24 +1,23 @@
 package com.tztang.pojo.entity;
 
-import java.io.Serializable;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
+import com.tztang.data.BaseTableData;
 import io.swagger.annotations.ApiModelProperty;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
  * @description  巡更记录表 
  * @author  tztang
- * @Date 2024-11-15
+ * @Date 2024-11-21
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class PatrolRecord  implements Serializable {
+@TableName("patrol_record")
+public class PatrolRecord extends BaseTableData implements Serializable {
 
-	private static final long serialVersionUID =  1381505556804047247L;
+	private static final long serialVersionUID =  6606143474192414199L;
 
 	/**
 	 * 任务唯一id
@@ -104,22 +103,5 @@ public class PatrolRecord  implements Serializable {
 	 * 单位编码
 	 */
 	private String relationId;
-
-	/**
-	 * 更新时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date updateTime;
-
-	/**
-	 * 创建时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date createTime;
-
-	/**
-	 * 0:正常 1:删除
-	 */
-	private Integer isDel;
 
 }

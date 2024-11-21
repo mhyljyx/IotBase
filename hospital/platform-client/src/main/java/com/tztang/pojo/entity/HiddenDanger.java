@@ -1,29 +1,33 @@
 package com.tztang.pojo.entity;
 
-import java.io.Serializable;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
+import com.tztang.data.BaseTableData;
 import io.swagger.annotations.ApiModelProperty;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
- * @description  巡更隐患信息表 
+ * @description  隐患信息表 
  * @author  tztang
- * @Date 2024-11-15
+ * @Date 2024-11-21
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class HiddenDangerLabel  implements Serializable {
+@TableName("hidden_danger")
+public class HiddenDanger extends BaseTableData implements Serializable {
 
-	private static final long serialVersionUID =  4986710696867840216L;
+	private static final long serialVersionUID =  1942476307970387654L;
 
 	/**
 	 * 事件id
 	 */
 	private String id;
+
+	/**
+	 * 运营服务机构唯一编码
+	 */
+	private String parentId;
 
 	/**
 	 * 巡更任务id（当danger_source=1时，表示巡更任务id）
@@ -69,22 +73,5 @@ public class HiddenDangerLabel  implements Serializable {
 	 * 隐患标签：0其他隐患，1消防给水管道没水，2消防设施故障，3消防器材缺失，4安全通道堵塞或关闭，5电线老化，6物联设备故障
 	 */
 	private String labelList;
-
-	/**
-	 * 更新时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date updateTime;
-
-	/**
-	 * 创建时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date createTime;
-
-	/**
-	 * 0:正常 1:删除
-	 */
-	private Integer isDel;
 
 }

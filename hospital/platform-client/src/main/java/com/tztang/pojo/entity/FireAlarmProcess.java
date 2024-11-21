@@ -1,24 +1,23 @@
 package com.tztang.pojo.entity;
 
-import java.io.Serializable;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
+import com.tztang.data.BaseTableData;
 import io.swagger.annotations.ApiModelProperty;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
 
 /**
  * @description  火灾预警处置信息 
  * @author  tztang
- * @Date 2024-11-15
+ * @Date 2024-11-21
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class FireAlarmProcess  implements Serializable {
+@TableName("fire_alarm_process")
+public class FireAlarmProcess extends BaseTableData implements Serializable {
 
-	private static final long serialVersionUID =  230297387072779298L;
+	private static final long serialVersionUID =  4129894505447267641L;
 
 	/**
 	 * 火灾预警事件唯一编码
@@ -92,22 +91,5 @@ public class FireAlarmProcess  implements Serializable {
 	 * 现场处理视频信息
 	 */
 	private String handleVideoUrls;
-
-	/**
-	 * 更新时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date updateTime;
-
-	/**
-	 * 创建时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date createTime;
-
-	/**
-	 * 0:正常 1:删除
-	 */
-	private Integer isDel;
 
 }

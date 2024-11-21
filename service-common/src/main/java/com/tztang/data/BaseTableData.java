@@ -24,11 +24,11 @@ public class BaseTableData {
      * 编辑时间
      * */
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date editTime;
+    private Date updateTime;
 
     /**
      * 1:正常 0:删除
      */
-    private Integer isDel;
+    private String isDel;
 
 }

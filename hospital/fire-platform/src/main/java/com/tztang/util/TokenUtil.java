@@ -6,6 +6,8 @@ import cn.hutool.crypto.digest.Digester;
 
 /**
  * 安防云平台消防板块Token
+ * @author tztang
+ * @since 2024-11-21
  */
 public class TokenUtil {
 

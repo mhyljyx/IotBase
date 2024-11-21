@@ -1,22 +1,19 @@
 package com.tztang.pojo.entity;
 
-import java.io.Serializable;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
+import com.tztang.data.BaseTableData;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @description  订阅平台 
  * @author  tztang
- * @Date 2024-11-15
+ * @Date 2024-11-21
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class PlatformDictionary  implements Serializable {
+public class PlatformDictionary extends BaseTableData implements Serializable {
 
-	private static final long serialVersionUID =  4301741238624888636L;
+	private static final long serialVersionUID =  3443450302073691064L;
 
 	/**
 	 * 平台标识

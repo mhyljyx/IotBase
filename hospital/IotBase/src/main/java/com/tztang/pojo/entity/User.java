@@ -1,9 +1,8 @@
 package com.tztang.pojo.entity;
 
-import java.io.Serializable;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
+import java.io.Serializable;
+import com.tztang.data.BaseTableData;
 import io.swagger.annotations.ApiModelProperty;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.util.Date;
@@ -11,14 +10,12 @@ import java.util.Date;
 /**
  * @description  用户信息表 
  * @author  tztang
- * @Date 2024-11-15
+ * @Date 2024-11-21
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class User  implements Serializable {
+public class User extends BaseTableData implements Serializable {
 
-	private static final long serialVersionUID =  2301310286348125498L;
+	private static final long serialVersionUID =  7087748970688013691L;
 
 	/**
 	 * 用户id
@@ -41,6 +38,21 @@ public class User  implements Serializable {
 	private String idNumber;
 
 	/**
+	 * 所属部门
+	 */
+	private String deptId;
+
+	/**
+	 * 账号
+	 */
+	private String account;
+
+	/**
+	 * 密码
+	 */
+	private String password;
+
+	/**
 	 * 手机号
 	 */
 	private String mobilePhone;
@@ -56,20 +68,18 @@ public class User  implements Serializable {
 	private String address;
 
 	/**
-	 * 更新时间
+	 * 角色
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date updateTime;
+	private String role;
 
 	/**
-	 * 创建时间
+	 * 人员类型
 	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date createTime;
+	private String type;
 
 	/**
-	 * 0:正常 1:删除
+	 * 状态 0.正常 1.锁定
 	 */
-	private Integer isDel;
+	private String status;
 
 }

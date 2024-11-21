@@ -1,22 +1,24 @@
 package com.tztang.dahua.pojo.entity;
 
-import java.io.Serializable;
+import com.tztang.data.BaseTableData;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import io.swagger.annotations.ApiModelProperty;
+
+import java.io.Serializable;
 
 /**
  * @description  事件订阅类型关联表 
  * @author  tztang
- * @Date 2024-11-14
+ * @Date 2024-11-21
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-public class EventSubscribeType  implements Serializable {
+public class EventSubscribeType extends BaseTableData implements Serializable {
 
-	private static final long serialVersionUID =  7476611276839196666L;
+	private static final long serialVersionUID =  6211828511225266788L;
+
+	/**
+	 * 事件订阅id一致
+	 */
+	private Integer subscribeId;
 
 	/**
 	 * 事件订阅名称
