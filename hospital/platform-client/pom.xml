@@ -14,5 +14,13 @@
 	<name>platform-client</name>
 	<description>安消平台公共参数模块</description>
 
+	<dependencies>
+		<dependency>
+			<groupId>com.tztang</groupId>
+			<artifactId>service-common</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+
 
 </project>

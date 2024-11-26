@@ -90,17 +90,18 @@ public enum BaseCode {
     USER_MOBILE_AND_EMAIL_NOT_EXIST(20001,"用户手机和邮箱需要选择一个"),
     
     USER_MOBILE_EMPTY(20002,"用户手机号不存在"),
-    USER_EXIST(20003,"用户已存在"),
+
+    SERVICEAGENCY_EXIST(30001,"运营服务机构已存在"),
+
+    SERVICEAGENCY_NOT_EXIST(30002,"运营服务机构不存在"),
+
+    COMMUNITY_EXIST(30003,"互联网单位已存在"),
+
+    COMMUNITY_NOT_EXIST(30004,"互联网单位不存在"),
     
-    DEPARTMENT_STRATEGY(30002,"departmentStrategy策略实现未找到"),
-    
-    PRODUCT_STOCK_NOT_ENOUGH(30003,"库存不足"),
-    
-    JOB_INFO_NOT_EXIST(30004,"jobInfo不存在"),
-    
-    MESSAGE_PLATFORM_NOT_EXIST(30005,"消息平台不存在"),
-    
-    GENERATE_STRATEGY_NOT_EXIST(30006,"执行的生成策略不存在"),
+    USER_NOT_EXIST(30005,"用户不存在"),
+
+    USER_EXIST(30006,"用户已存在"),
     
     REJECT_STRATEGY_NOT_EXIST(30007,"执行的拒绝策略不存在"),
     

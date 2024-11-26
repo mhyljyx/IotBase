@@ -34,7 +34,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(value="UserVo", description ="分页返回数据")
+@ApiModel(value="PageVo", description ="分页返回数据")
 public class PageVo<T> implements Serializable {
 
     private static final long serialVersionUID = 1L;

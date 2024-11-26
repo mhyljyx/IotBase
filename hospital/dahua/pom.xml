@@ -61,6 +61,12 @@
       <optional>true</optional>
     </dependency>
 
+    <dependency>
+      <groupId>com.tztang</groupId>
+      <artifactId>platform-client</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+
   </dependencies>
 
 </project>

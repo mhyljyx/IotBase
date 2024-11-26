@@ -10,7 +10,6 @@
 		<relativePath>../pom.xml</relativePath> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.tztang</groupId>
 	<artifactId>service-common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>service-common</name>

@@ -12,6 +12,7 @@ import com.dahuatech.icc.oauth.model.v202010.GeneralRequest;
 import com.dahuatech.icc.oauth.model.v202010.GeneralResponse;
 import com.tztang.dahua.pojo.dto.*;
 import com.tztang.dahua.request.EventSubscribeQueryRequest;
+import com.tztang.pojo.dto.EventSubscribeDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;

@@ -3,11 +3,11 @@ package com.tztang.dahua.service;
 import com.dahuatech.icc.exception.ClientException;
 import com.tztang.page.PageVo;
 import com.tztang.common.ApiResponse;
-import com.tztang.dahua.pojo.dto.EventSubscribeDto;
-import com.tztang.dahua.pojo.dto.EventSubscribeQueryDto;
-import com.tztang.dahua.pojo.dto.EventUnSubscribeDto;
-import com.tztang.dahua.pojo.dto.PublicSubscribeDto;
-import com.tztang.dahua.pojo.vo.EventSubscribeQueryVo;
+import com.tztang.pojo.dto.EventSubscribeDto;
+import com.tztang.pojo.dto.EventSubscribeQueryDto;
+import com.tztang.pojo.dto.EventUnSubscribeDto;
+import com.tztang.pojo.dto.PublicSubscribeDto;
+import com.tztang.pojo.vo.EventSubscribeQueryVo;
 
 /**
  * 事件订阅

@@ -30,8 +30,7 @@ public class PatrolPoint extends BaseTableData implements Serializable {
 	private String name;
 
 	/**
-	 * 运营服务机
-构唯一编码
+	 * 运营服务机构唯一编码
 	 */
 	private String parentId;
 
