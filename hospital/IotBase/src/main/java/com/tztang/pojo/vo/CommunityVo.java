@@ -17,6 +17,9 @@ public class CommunityVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	@ApiModelProperty(name ="id", dataType ="Integer", value ="互联网单位id")
+	private Integer id;
+
 	@ApiModelProperty(name ="code", dataType ="String", value ="联网单位编码")
 	private String code;
 

@@ -15,10 +15,7 @@ import com.tztang.pojo.dto.UUIDDto;
 import com.tztang.pojo.dto.UserDto;
 import com.tztang.pojo.dto.UserQueryDto;
 import com.tztang.pojo.dto.UserUpdateDto;
-import com.tztang.pojo.entity.CommunityDo;
-import com.tztang.pojo.entity.ServiceagencyDo;
 import com.tztang.pojo.entity.UserDo;
-import com.tztang.pojo.vo.ServiceagencyVo;
 import com.tztang.pojo.vo.UserVo;
 import com.tztang.service.UUIDService;
 import com.tztang.service.UserService;
@@ -35,7 +32,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDo> implements 
 
     @Override
     public void create(UserDto dto) {
-        String id = uuidService.generateUUID(new UUIDDto(null, 16));
+        String id = uuidService.generateUUID(new UUIDDto("U_", 18));
         UserDo userDo = this.baseMapper.selectById(id);
         if (ObjectUtil.isNotNull(userDo)) {
             throw new DemoFrameException(BaseCode.USER_EXIST);

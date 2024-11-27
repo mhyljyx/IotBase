@@ -6,9 +6,10 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
- * 更新用户信息DTO
+ * 更新用户
  * @author tztang
  * @since 2024-11-26
  */
@@ -49,6 +50,7 @@ public class UserUpdateDto {
     private String password;
 
     @Length(max = 32,  message = "手机号长度不能超过32")
+    @Pattern(regexp = "^1[3-9]\\\\d{9}$", message = "手机号格式不正确")
     @ApiModelProperty(name ="mobilePhone", dataType ="String", value ="手机号")
     private String mobilePhone;
 
@@ -65,12 +67,9 @@ public class UserUpdateDto {
     @ApiModelProperty(name ="role", dataType ="String", value ="角色", required = true)
     private String role;
 
+    @NotBlank(message = "人员类型不能为空")
     @Length(max = 3,  message = "人员类型长度不能超过3")
     @ApiModelProperty(name ="type", dataType ="String", value ="人员类型")
     private String type;
-
-    @Length(max = 1, min = 1, message = "状态长度必须为1")
-    @ApiModelProperty(name ="status", dataType ="String", value ="状态 0.正常 1.锁定")
-    private String status;
 
 }

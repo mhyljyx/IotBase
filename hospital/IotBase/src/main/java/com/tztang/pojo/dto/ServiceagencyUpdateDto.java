@@ -6,6 +6,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
  * @description  物联网运营服务机构
@@ -14,7 +15,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @ApiModel("更新物联网运营服务机构DTO")
-public class ServiceagencyUpdateDto {
+public class ServiceAgencyUpdateDto {
 
 	@NotBlank(message = "运营服务机构唯一编码不能为空")
 	@Length(max = 32, message = "运营服务机构唯一编码长度不能超过32")
@@ -31,7 +32,6 @@ public class ServiceagencyUpdateDto {
 	@ApiModelProperty(name ="companyCode", dataType ="String", value ="统一社会信用代码",required = true)
 	private String companyCode;
 
-	@NotBlank(message = "单位地址不能为空")
 	@Length(max = 255, message = "单位地址长度不能超过255")
 	@ApiModelProperty(name ="address", dataType ="String", value ="单位地址",required = true)
 	private String address;
@@ -45,6 +45,7 @@ public class ServiceagencyUpdateDto {
 	private String legalRepresenId;
 
 	@Length(max = 16, message = "法定代表人联系电话长度不能超过16")
+	@Pattern(regexp = "^1[3-9]\\\\d{9}$", message = "法定代表人联系电话格式不正确")
 	@ApiModelProperty(name ="legalRepresenTel", dataType ="String", value ="法定代表人联系电话")
 	private String legalRepresenTel;
 
@@ -59,6 +60,7 @@ public class ServiceagencyUpdateDto {
 	private String contactName;
 
 	@Length(max = 16, message = "运营机构责任人联系电话长度不能超过16")
+	@Pattern(regexp = "^1[3-9]\\\\d{9}$", message = "运营机构责任人联系电话格式不正确")
 	@ApiModelProperty(name ="contactTel", dataType ="String", value ="运营机构责任人联系电话")
 	private String contactTel;
 

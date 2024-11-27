@@ -13,7 +13,7 @@ import java.io.Serializable;
  * @Date 2024-11-26
  */
 @Data
-public class ServiceagencyVo implements Serializable {
+public class ServiceAgencyVo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

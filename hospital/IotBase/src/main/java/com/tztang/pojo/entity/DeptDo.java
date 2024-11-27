@@ -17,6 +17,8 @@ import java.util.Date;
 @TableName("dept")
 public class DeptDo extends BaseTableData implements Serializable {
 
+	public static final String ROOT_ID = "0";
+
 	private static final long serialVersionUID = 1L;
 
 	/**

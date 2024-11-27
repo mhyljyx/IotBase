@@ -2,11 +2,11 @@ package com.tztang.controller;
 
 import com.tztang.common.ApiResponse;
 import com.tztang.page.PageVo;
-import com.tztang.pojo.dto.ServiceagencyDto;
-import com.tztang.pojo.dto.ServiceagencyQueryDto;
-import com.tztang.pojo.dto.ServiceagencyUpdateDto;
-import com.tztang.pojo.vo.ServiceagencyVo;
-import com.tztang.service.ServiceagencyService;
+import com.tztang.pojo.dto.ServiceAgencyDto;
+import com.tztang.pojo.dto.ServiceAgencyQueryDto;
+import com.tztang.pojo.dto.ServiceAgencyUpdateDto;
+import com.tztang.pojo.vo.ServiceAgencyVo;
+import com.tztang.service.ServiceAgencyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -23,14 +23,14 @@ import java.util.Set;
 @Validated
 @RestController
 @RequestMapping("/common/serviceagency/api/")
-public class ServiceagencyController {
+public class ServiceAgencyController {
 
     @Resource
-    private ServiceagencyService serviceagencyService;
+    private ServiceAgencyService serviceagencyService;
 
     @ApiOperation(value = "新增物联网运营服务机构")
     @PostMapping(value = "/create")
-    public ApiResponse<Void> create(@Valid @RequestBody ServiceagencyDto serviceagencyDto){
+    public ApiResponse<Void> create(@Valid @RequestBody ServiceAgencyDto serviceagencyDto){
         serviceagencyService.create(serviceagencyDto);
         return ApiResponse.ok();
     }
@@ -44,14 +44,14 @@ public class ServiceagencyController {
 
     @ApiOperation(value = "修改物联网运营服务机构")
     @PostMapping(value = "/update")
-    public ApiResponse<Void> update(@Valid @RequestBody ServiceagencyUpdateDto serviceagencyUpdateDto){
+    public ApiResponse<Void> update(@Valid @RequestBody ServiceAgencyUpdateDto serviceagencyUpdateDto){
         serviceagencyService.update(serviceagencyUpdateDto);
         return ApiResponse.ok();
     }
 
     @ApiOperation(value = "查询物联网运营服务机构")
     @PostMapping(value = "/query")
-    public ApiResponse<PageVo<ServiceagencyVo>> query(@Valid @RequestBody ServiceagencyQueryDto serviceagencyQueryDto){
+    public ApiResponse<PageVo<ServiceAgencyVo>> query(@Valid @RequestBody ServiceAgencyQueryDto serviceagencyQueryDto){
         return ApiResponse.ok(serviceagencyService.query(serviceagencyQueryDto));
     }
 

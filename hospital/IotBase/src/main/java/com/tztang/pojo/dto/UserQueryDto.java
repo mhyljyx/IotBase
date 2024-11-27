@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
- * 查询用户信息DTO
+ * 查询用户
  * @author tztang
  * @since 2024-11-26
  */

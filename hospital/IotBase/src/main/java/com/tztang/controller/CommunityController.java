@@ -4,7 +4,6 @@ import com.tztang.common.ApiResponse;
 import com.tztang.page.PageVo;
 import com.tztang.pojo.dto.*;
 import com.tztang.pojo.vo.CommunityVo;
-import com.tztang.pojo.vo.ServiceagencyVo;
 import com.tztang.service.CommunityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

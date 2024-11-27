@@ -82,7 +82,4 @@ public class CommunityDto {
 	@ApiModelProperty(name ="lat", dataType ="String", value ="维度")
 	private String lat;
 
-	@ApiModelProperty(name ="isOpen", dataType ="Boolean", value ="是否启用上传(false:关闭上传 true:开启上传)")
-	private Boolean isOpen;
-
 }

@@ -1,11 +1,11 @@
 package com.tztang.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.tztang.pojo.entity.ServiceAgencyDo;
+import com.tztang.pojo.entity.AdminDo;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public interface ServiceAgencyMapper extends BaseMapper<ServiceAgencyDo> {
+public interface AdminMapper extends BaseMapper<AdminDo> {
 
 
 

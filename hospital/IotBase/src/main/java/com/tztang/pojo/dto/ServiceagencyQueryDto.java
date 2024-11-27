@@ -16,7 +16,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Data
 @ApiModel("查询物联网运营服务机构DTO")
-public class ServiceagencyQueryDto extends BasePageDto {
+public class ServiceAgencyQueryDto extends BasePageDto {
 
 	@Length(max = 32, message = "物联网运营服务机构名称长度不能超过32")
 	@ApiModelProperty(name ="name", dataType ="String", value ="物联网运营服务机构名称")

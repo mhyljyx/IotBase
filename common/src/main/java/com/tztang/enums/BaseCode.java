@@ -91,9 +91,9 @@ public enum BaseCode {
     
     USER_MOBILE_EMPTY(20002,"用户手机号不存在"),
 
-    SERVICEAGENCY_EXIST(30001,"运营服务机构已存在"),
+    SERVICE_AGENCY_EXIST(30001,"运营服务机构已存在"),
 
-    SERVICEAGENCY_NOT_EXIST(30002,"运营服务机构不存在"),
+    SERVICE_AGENCY_NOT_EXIST(30002,"运营服务机构不存在"),
 
     COMMUNITY_EXIST(30003,"互联网单位已存在"),
 
@@ -103,9 +103,15 @@ public enum BaseCode {
 
     USER_EXIST(30006,"用户已存在"),
     
-    REJECT_STRATEGY_NOT_EXIST(30007,"执行的拒绝策略不存在"),
+    PARENT_DEPT_NOT_EXIST(30007,"父级部门不存在"),
     
-    PROGRAM_GROUP_NOT_EXIST(30009,"节目分组不存在"),
+    DEPT_NOT_EXIST(30009,"部门不存在"),
+
+    DEPT_EXIST(30009,"部门已存在"),
+
+    ADMIN_NOT_EXIST(30010,"管理员不存在"),
+
+    ADMIN_EXIST(30011,"管理员已存在"),
     
     PROGRAM_NOT_EXIST(40000,"节目不存在"),
     

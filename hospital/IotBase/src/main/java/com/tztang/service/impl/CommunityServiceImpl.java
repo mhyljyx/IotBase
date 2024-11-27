@@ -15,9 +15,7 @@ import com.tztang.pojo.dto.CommunityDto;
 import com.tztang.pojo.dto.CommunityQueryDto;
 import com.tztang.pojo.dto.CommunityUpdateDto;
 import com.tztang.pojo.entity.CommunityDo;
-import com.tztang.pojo.entity.ServiceagencyDo;
 import com.tztang.pojo.vo.CommunityVo;
-import com.tztang.pojo.vo.ServiceagencyVo;
 import com.tztang.service.CommunityService;
 import org.springframework.stereotype.Service;
 

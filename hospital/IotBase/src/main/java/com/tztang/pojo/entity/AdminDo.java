@@ -30,6 +30,11 @@ public class AdminDo extends BaseTableData implements Serializable {
 	private String account;
 
 	/**
+	 * 邮箱
+	 */
+	private String mail;
+
+	/**
 	 * 管理员名称
 	 */
 	private String name;

@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 @TableName("serviceagency")
-public class ServiceagencyDo extends BaseTableData implements Serializable {
+public class ServiceAgencyDo extends BaseTableData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

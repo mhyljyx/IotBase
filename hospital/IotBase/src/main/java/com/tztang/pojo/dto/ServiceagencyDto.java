@@ -8,6 +8,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import java.io.Serializable;
 
 /**
@@ -17,7 +18,7 @@ import java.io.Serializable;
  */
 @Data
 @ApiModel("新增物联网运营服务机构DTO")
-public class ServiceagencyDto {
+public class ServiceAgencyDto {
 
 	@NotBlank(message = "物联网运营服务机构名称不能为空")
 	@Length(max = 32, message = "物联网运营服务机构名称长度不能超过32")
@@ -43,6 +44,7 @@ public class ServiceagencyDto {
 	private String legalRepresenId;
 
 	@Length(max = 16, message = "法定代表人联系电话长度不能超过16")
+	@Pattern(regexp = "^1[3-9]\\\\d{9}$", message = "法定代表人联系电话格式不正确")
 	@ApiModelProperty(name ="legalRepresenTel", dataType ="String", value ="法定代表人联系电话")
 	private String legalRepresenTel;
 
@@ -57,6 +59,7 @@ public class ServiceagencyDto {
 	private String contactName;
 
 	@Length(max = 16, message = "运营机构责任人联系电话长度不能超过16")
+	@Pattern(regexp = "^1[3-9]\\\\d{9}$", message = "运营机构责任人联系电话格式不正确")
 	@ApiModelProperty(name ="contactTel", dataType ="String", value ="运营机构责任人联系电话")
 	private String contactTel;
 

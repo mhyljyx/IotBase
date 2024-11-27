@@ -36,7 +36,6 @@ public class CommunityUpdateDto {
 	@ApiModelProperty(name ="creditCode", dataType ="String", value ="联网单位地址编码",required = true)
 	private String creditCode;
 
-	@NotBlank(message = "联网单位地址不能为空")
 	@Length(max = 64, message = "联网单位地址长度不能超过64")
 	@ApiModelProperty(name ="address", dataType ="String", value ="联网单位地址",required = true)
 	private String address;
@@ -46,12 +45,10 @@ public class CommunityUpdateDto {
 	@ApiModelProperty(name ="regionCode", dataType ="String", value ="行政区域编码",required = true)
 	private String regionCode;
 
-	@NotBlank(message = "管辖单位联系电话不能为空")
 	@Length(max = 16, message = "管辖单位联系电话长度不能超过16")
 	@ApiModelProperty(name ="phoneNum", dataType ="String", value ="管辖单位联系电话",required = true)
 	private String phoneNum;
 
-	@NotBlank(message = "管辖单位不能为空")
 	@Length(max = 32, message = "管辖单位长度不能超过32")
 	@ApiModelProperty(name ="managerCompany", dataType ="String", value ="管辖单位",required = true)
 	private String managerCompany;
@@ -78,8 +75,5 @@ public class CommunityUpdateDto {
 	@Length(max = 16, message = "维度长度不能超过16")
 	@ApiModelProperty(name ="lat", dataType ="String", value ="维度")
 	private String lat;
-
-	@ApiModelProperty(name ="isOpen", dataType ="Boolean", value ="是否启用上传(false:关闭上传 true:开启上传)")
-	private Boolean isOpen;
 
 }

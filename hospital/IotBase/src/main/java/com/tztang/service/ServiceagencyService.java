@@ -1,13 +1,12 @@
 package com.tztang.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.tztang.common.ApiResponse;
 import com.tztang.page.PageVo;
-import com.tztang.pojo.dto.ServiceagencyDto;
-import com.tztang.pojo.dto.ServiceagencyQueryDto;
-import com.tztang.pojo.dto.ServiceagencyUpdateDto;
-import com.tztang.pojo.entity.ServiceagencyDo;
-import com.tztang.pojo.vo.ServiceagencyVo;
+import com.tztang.pojo.dto.ServiceAgencyDto;
+import com.tztang.pojo.dto.ServiceAgencyQueryDto;
+import com.tztang.pojo.dto.ServiceAgencyUpdateDto;
+import com.tztang.pojo.entity.ServiceAgencyDo;
+import com.tztang.pojo.vo.ServiceAgencyVo;
 
 import java.util.Set;
 
@@ -16,18 +15,18 @@ import java.util.Set;
  * @author  tztang
  * @Date 2024-11-25
  */
-public interface ServiceagencyService extends IService<ServiceagencyDo> {
+public interface ServiceAgencyService extends IService<ServiceAgencyDo> {
 
     //新增物联网运营服务机构
-    void create(ServiceagencyDto dto);
+    void create(ServiceAgencyDto dto);
 
     //删除物联网运营服务机构
     void delete(Set<String> ids);
 
     //修改物联网运营服务机构
-    void update(ServiceagencyUpdateDto dto);
+    void update(ServiceAgencyUpdateDto dto);
 
     //查询物联网运营服务机构
-    PageVo<ServiceagencyVo> query(ServiceagencyQueryDto dto);
+    PageVo<ServiceAgencyVo> query(ServiceAgencyQueryDto dto);
 
 }
