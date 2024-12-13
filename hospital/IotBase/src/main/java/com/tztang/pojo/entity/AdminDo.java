@@ -47,7 +47,7 @@ public class AdminDo extends BaseTableData implements Serializable {
 	/**
 	 * 管理员角色
 	 */
-	private String role;
+	private Integer roleId;
 
 	/**
 	 * 状态 0.正常 1.锁定

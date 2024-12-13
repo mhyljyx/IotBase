@@ -214,40 +214,8 @@ public enum BaseCode {
     NOT_FOUND(60007,"not found api %s %s"),
     
     GENERATE_RSA_SIGN_ERROR(60008,"生成res签名验证失败"),
-    
-    PAY_ERROR(60009,"支付异常"),
-    
-    PAY_STRATEGY_NOT_EXIST(60010,"此支付策略不存在"),
-    
-    PAY_BILL_IS_NOT_NO_PAY(60011,"此账单不是未支付状态"),
-    
-    ALIPAY_TRADE_STATUS_NOT_EXIST(60012,"支付宝支付状态未知"),
-    
-    PAY_PRICE_NOT_EQUAL_ORDER_PRICE(60013,"支付金额和订单金额不一致"),
-    
-    OPERATE_ORDER_STATUS_NOT_PERMIT(60014,"操作订单状态不允许"),
-    
-    PAY_CHANNEL_NOT_EXIST(60015,"支付方式不存在"),
-    
-    PAY_BILL_NOT_EXIST(60016,"账单不存在"),
-    
-    PAY_TRADE_CHECK_ERROR(60017,"支付状态检查错误"),
-    
-    UPDATE_TICKET_CATEGORY_COUNT_NOT_CORRECT(60018,"更新票档数量不正确"),
-    
-    GET_USER_AND_TICKET_USER_ERROR(60019,"获取用户和购票人信息错误"),
-    
-    TICKET_USER_ID_REPEAT(60020,"购票人id重复"),
-    
-    TICKET_USER_COUNT_UNEQUAL_SEAT_COUNT(60021,"购票人数量和要购买的座位数量不相等"),
-    
-    REFUND_ERROR(60022,"退款异常"),
-    
-    PAY_BILL_IS_NOT_PAY_STATUS(60023,"账单不是已支付状态"),
-    
-    REFUND_AMOUNT_GREATER_THAN_PAY_AMOUNT(60024,"退款金额大于支付金额"),
-    
-    ORDER_NUMBER_NOT_EXIST(70000,"order_number的值不存在"),
+
+    USER_LOG_OUT(60009,"用户已注销"),
     
     USER_ID_NOT_EXIST(70001,"user_id的值不存在"),
     

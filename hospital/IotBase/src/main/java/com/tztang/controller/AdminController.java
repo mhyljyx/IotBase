@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.util.Map;
 import java.util.Set;
 
 @Slf4j
@@ -27,29 +28,35 @@ public class AdminController {
     @Resource
     private AdminService adminService;
 
+    @ApiOperation(value = "管理员登录")
+    @PostMapping(value = "login")
+    public ApiResponse<Map<String, Object>> login(@Valid @RequestBody AdminLoginDto adminLoginDto){
+        return ApiResponse.ok(adminService.login(adminLoginDto));
+    }
+
     @ApiOperation(value = "新增管理员")
-    @PostMapping(value = "/create")
+    @PostMapping(value = "create")
     public ApiResponse<Void> create(@Valid @RequestBody AdminDto adminDto){
         adminService.create(adminDto);
         return ApiResponse.ok();
     }
 
     @ApiOperation(value = "删除管理员")
-    @DeleteMapping(value = "/delete")
+    @DeleteMapping(value = "delete")
     public ApiResponse<Void> delete(@NotEmpty(message = "管理员id不能为空") @RequestBody Set<String> ids){
         adminService.delete(ids);
         return ApiResponse.ok();
     }
 
     @ApiOperation(value = "修改管理员")
-    @PostMapping(value = "/update")
+    @PostMapping(value = "update")
     public ApiResponse<Void> update(@Valid @RequestBody AdminUpdateDto adminUpdateDto){
         adminService.update(adminUpdateDto);
         return ApiResponse.ok();
     }
 
     @ApiOperation(value = "查询管理员")
-    @PostMapping(value = "/query")
+    @PostMapping(value = "query")
     public ApiResponse<PageVo<AdminVo>> query(@Valid @RequestBody AdminQueryDto adminQueryDto){
         return ApiResponse.ok(adminService.query(adminQueryDto));
     }

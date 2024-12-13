@@ -11,7 +11,7 @@
  Target Server Version : 50742
  File Encoding         : 65001
 
- Date: 21/11/2024 17:59:49
+ Date: 10/12/2024 15:43:54
 */
 
 SET NAMES utf8mb4;
@@ -23,11 +23,12 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `admin`;
 CREATE TABLE `admin`  (
   `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '管理员id',
-  `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '账号',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '管理员名称',
-  `password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
-  `role` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '管理员角色',
-  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态 0.正常 1.锁定',
+  `account` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '账号',
+  `mail` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '邮箱',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '管理员名称',
+  `password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+  `role_id` bigint(11) NULL DEFAULT NULL COMMENT '人员角色',
+  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态 0.正常 1.锁定',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '0:正常 1:删除',
@@ -58,6 +59,7 @@ CREATE TABLE `community`  (
   `map_type` int(3) NULL DEFAULT NULL COMMENT '地图类型',
   `lng` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '经度',
   `lat` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '维度',
+  `is_open` tinyint(1) UNSIGNED ZEROFILL NOT NULL DEFAULT 0 COMMENT '0:关闭上传 1:开启上传',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '0:正常 1:删除',
@@ -73,10 +75,10 @@ CREATE TABLE `community`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `dept`;
 CREATE TABLE `dept`  (
-  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门id',
+  `id` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '部门id',
   `open_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地方三方部门id',
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '部门名称',
-  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '父级部门id',
+  `parent_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '父级部门id',
   `remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
@@ -305,31 +307,6 @@ CREATE TABLE `fire_alarm_process`  (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for flyway_schema_history
--- ----------------------------
-DROP TABLE IF EXISTS `flyway_schema_history`;
-CREATE TABLE `flyway_schema_history`  (
-  `installed_rank` int(11) NOT NULL,
-  `version` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `description` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `type` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `script` varchar(1000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `checksum` int(11) NULL DEFAULT NULL,
-  `installed_by` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `installed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `execution_time` int(11) NOT NULL,
-  `success` tinyint(1) NOT NULL,
-  PRIMARY KEY (`installed_rank`) USING BTREE,
-  INDEX `flyway_schema_history_s_idx`(`success`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = Dynamic;
-
--- ----------------------------
--- Records of flyway_schema_history
--- ----------------------------
-INSERT INTO `flyway_schema_history` VALUES (1, '1', '<< Flyway Baseline >>', 'BASELINE', '<< Flyway Baseline >>', NULL, 'root', '2024-11-14 17:44:26', 0, 1);
-INSERT INTO `flyway_schema_history` VALUES (2, '1.0.20241114', 'base', 'SQL', 'V1.0.20241114__base.sql', -1405947239, 'root', '2024-11-14 17:44:33', 6654, 1);
-
--- ----------------------------
 -- Table structure for hidden_danger
 -- ----------------------------
 DROP TABLE IF EXISTS `hidden_danger`;
@@ -494,29 +471,124 @@ INSERT INTO `platform_dictionary` VALUES ('haikang', '海康');
 INSERT INTO `platform_dictionary` VALUES ('other', '其他');
 
 -- ----------------------------
--- Table structure for serviceagency
+-- Table structure for service_agency
 -- ----------------------------
-DROP TABLE IF EXISTS `serviceagency`;
-CREATE TABLE `serviceagency`  (
-  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '运营服务机\r\n构唯一编码',
-  `serviceagency_name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '消防物联网运营服务机构名称',
+DROP TABLE IF EXISTS `service_agency`;
+CREATE TABLE `service_agency`  (
+  `id` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '运营服务机\r\n构唯一编码',
+  `name` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '消防物联网运营服务机构名称',
   `company_code` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '统一社会信用代码',
   `address` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '单位地址',
-  `legal_represen_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '法定代表人姓名',
-  `legal_represen_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '法定代表人身份证号码',
-  `legal_represen_tel` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '法定代表人联系电话',
-  `company_num` int(5) NULL DEFAULT NULL COMMENT '接入联网单位总数',
+  `legal_represen_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '法定代表人姓名',
+  `legal_represen_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '法定代表人身份证号码',
+  `legal_represen_tel` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '法定代表人联系电话',
+  `company_num` int(5) UNSIGNED ZEROFILL NULL DEFAULT NULL COMMENT '接入联网单位总数',
   `serviceagency_area` int(5) NULL DEFAULT NULL COMMENT '机构运营场地面积',
   `onduty_person_num` int(3) NULL DEFAULT NULL COMMENT '值守人员总数',
   `contact_name` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '运营机构责任人姓名',
   `contact_tel` varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '运营机构责任人联系电话',
+  `ak` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'ak:用于生成token',
+  `sk` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'sk:用于生成token',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '0:正常 1:删除'
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '消防物联网运营服务机构表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
--- Records of serviceagency
+-- Records of service_agency
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_api
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_api`;
+CREATE TABLE `sys_api`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '接口名称',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '接口路径',
+  `method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '请求方法(GET/POST/PUT/DELETE)',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `unique_url_method`(`url`, `method`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统接口表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_api
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_menu`;
+CREATE TABLE `sys_menu`  (
+  `id` bigint(11) NOT NULL COMMENT '菜单ID（主键）',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单名称\n',
+  `url` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '前端路由地址\n',
+  `parent_id` int(11) NULL DEFAULT NULL COMMENT '父菜单ID（支持菜单树）',
+  `type` tinyint(1) NULL DEFAULT NULL COMMENT '类型（0目录，1菜单）',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统菜单表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_menu
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_role
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role`;
+CREATE TABLE `sys_role`  (
+  `id` bigint(11) NOT NULL COMMENT '角色ID（主键）',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名称',
+  `description` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '描述',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `is_del` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '0:正常 1:删除',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_role_api
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_api`;
+CREATE TABLE `sys_role_api`  (
+  `role_id` bigint(11) NOT NULL COMMENT '角色ID（外键',
+  `api_id` bigint(11) NOT NULL COMMENT '接口ID（外键）',
+  INDEX `role_id`(`role_id`) USING BTREE,
+  INDEX `api_id`(`api_id`) USING BTREE,
+  CONSTRAINT `sys_role_api_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `sys_role_api_ibfk_2` FOREIGN KEY (`api_id`) REFERENCES `sys_api` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色-接口关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role_api
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for sys_role_menu
+-- ----------------------------
+DROP TABLE IF EXISTS `sys_role_menu`;
+CREATE TABLE `sys_role_menu`  (
+  `role_id` bigint(11) NOT NULL COMMENT '角色ID（外键',
+  `menu_id` bigint(11) NOT NULL COMMENT '菜单ID（外键）',
+  INDEX `role_id`(`role_id`) USING BTREE,
+  INDEX `menu_id`(`menu_id`) USING BTREE,
+  CONSTRAINT `sys_role_menu_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
+  CONSTRAINT `sys_role_menu_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `sys_menu` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统角色-菜单关联表' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of sys_role_menu
 -- ----------------------------
 
 -- ----------------------------
@@ -524,23 +596,25 @@ CREATE TABLE `serviceagency`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user`  (
-  `id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id',
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户姓名',
-  `sex` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '性别 0女 1男 9未知',
+  `id` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户id',
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户姓名',
+  `sex` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '性别 0女 1男 9未知',
   `id_number` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证信息',
-  `dept_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所属部门',
-  `account` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '账号',
+  `dept_id` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '所属部门',
+  `account` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '账号',
   `password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '密码',
   `mobile_phone` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `phone` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '座机号',
   `address` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '地址',
-  `role` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色',
+  `role_id` bigint(11) NULL DEFAULT NULL COMMENT '人员角色',
   `type` varchar(3) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '人员类型',
-  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '状态 0.正常 1.锁定',
+  `status` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '状态 0.正常 1.锁定',
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `is_del` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT '0' COMMENT '0:正常 1:删除',
-  PRIMARY KEY (`id`) USING BTREE
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `role_id`(`role_id`) USING BTREE,
+  CONSTRAINT `user_ibfk_1` FOREIGN KEY (`role_id`) REFERENCES `sys_role` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = Dynamic;
 
 -- ----------------------------

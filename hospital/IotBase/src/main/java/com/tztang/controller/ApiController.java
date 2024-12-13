@@ -2,6 +2,7 @@ package com.tztang.controller;
 
 import com.tztang.common.ApiResponse;
 import com.tztang.config.ApiScanner;
+import com.tztang.service.SysApiService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -20,12 +21,12 @@ import javax.annotation.Resource;
 public class ApiController {
 
     @Resource
-    private ApiScanner apiScanner;
+    private SysApiService sysApiService;
 
     @ApiOperation(value = "系统接口同步")
     @PostMapping("/sync-sysApi")
     public ApiResponse<Void> syncSysApi() {
-        apiScanner.scanApis();
+        sysApiService.scanApis();
         return ApiResponse.ok();
     }
 

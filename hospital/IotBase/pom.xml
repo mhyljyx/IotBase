@@ -19,11 +19,6 @@
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.tztang</groupId>
-            <artifactId>dahua</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
 
         <dependency>
             <groupId>org.flywaydb</groupId>
@@ -34,6 +29,17 @@
         <dependency>
             <groupId>com.tztang</groupId>
             <artifactId>service-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.tztang</groupId>
+            <artifactId>redis-framework</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 

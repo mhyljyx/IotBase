@@ -71,7 +71,7 @@ public class UserDo extends BaseTableData implements Serializable {
 	/**
 	 * 角色
 	 */
-	private String role;
+	private Integer roleId;
 
 	/**
 	 * 人员类型

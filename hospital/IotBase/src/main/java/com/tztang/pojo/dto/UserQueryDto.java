@@ -20,9 +20,6 @@ public class UserQueryDto extends BasePageDto {
     @ApiModelProperty(name ="deptId", dataType ="String", value ="部门id")
     private String deptId;
 
-    @ApiModelProperty(name ="role", dataType ="String", value ="角色")
-    private String role;
-
     @ApiModelProperty(name ="type", dataType ="String", value ="人员类型")
     private String type;
 

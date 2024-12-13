@@ -30,8 +30,8 @@ public class AdminVo {
 	@ApiModelProperty(name ="password", dataType ="String", value ="密码")
 	private String password;
 
-	@ApiModelProperty(name ="role", dataType ="String", value ="管理员角色")
-	private String role;
+	@ApiModelProperty(name ="role", dataType ="Integer", value ="管理员角色")
+	private Integer roleId;
 
 	@ApiModelProperty(name ="status", dataType ="String", value ="状态 0.正常 1.锁定")
 	private String status;

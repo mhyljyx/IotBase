@@ -1,6 +1,7 @@
 package com.tztang.dahua.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.tztang.pojo.entity.EventSubscribeGrade;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;

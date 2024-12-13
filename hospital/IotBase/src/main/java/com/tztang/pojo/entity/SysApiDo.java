@@ -17,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName("sys_api")
-public class SysApi extends BaseTableData implements Serializable {
+public class SysApiDo extends BaseTableData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -44,24 +44,15 @@ public class SysApi extends BaseTableData implements Serializable {
 	 */
 	private String description;
 
-	/**
-	 * 更新时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date updateTime;
+	public SysApiDo(String name, String url, String method, String description) {
+		this.name = name;
+		this.url = url;
+		this.method = method;
+		this.description = description;
+	}
 
-	/**
-	 * 创建时间
-	 */
-	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Date createTime;
-
-	/**
-	 * 0:正常 1:删除
-	 */
-	private String isDel;
-
-	public SysApi(String name, String url, String method, String description) {
+	public SysApiDo(Long id, String name, String url, String method, String description) {
+		this.id = id;
 		this.name = name;
 		this.url = url;
 		this.method = method;
