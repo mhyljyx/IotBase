@@ -58,10 +58,9 @@ public class UserDto {
     @ApiModelProperty(name ="address", dataType ="String", value ="地址")
     private String address;
 
-    @NotBlank(message = "角色不能为空")
-    @Length(max = 3,  message = "角色长度不能超过3")
-    @ApiModelProperty(name ="role", dataType ="String", value ="角色", required = true)
-    private String role;
+    @NotBlank(message = "角色类型不能为空")
+    @ApiModelProperty(name ="roleType", dataType ="String", value ="角色类型", required = true)
+    private String roleType;
 
     @ApiModelProperty(name ="type", dataType ="String", value ="人员类型")
     private String type;

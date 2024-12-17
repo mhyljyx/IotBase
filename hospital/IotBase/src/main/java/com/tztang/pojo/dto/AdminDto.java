@@ -8,6 +8,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -38,8 +39,8 @@ public class AdminDto {
 	@ApiModelProperty(name ="password", dataType ="String", value ="密码", required = true)
 	private String password;
 
-	@Length(max = 1, min = 1, message = "管理员角色长度必须为1")
-	@ApiModelProperty(name ="role", dataType ="String", value ="管理员角色", required = true)
-	private String role;
+	@NotBlank(message = "角色类型不能为空")
+	@ApiModelProperty(name ="roleType", dataType ="String", value ="角色类型", required = true)
+	private String roleType;
 
 }

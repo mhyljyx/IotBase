@@ -14,7 +14,7 @@ import java.util.Date;
  * @Date 2024-11-21
  */
 @Data
-@TableName("admin")
+@TableName("sys_admin")
 public class AdminDo extends BaseTableData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -47,7 +47,7 @@ public class AdminDo extends BaseTableData implements Serializable {
 	/**
 	 * 管理员角色
 	 */
-	private Integer roleId;
+	private String roleType;
 
 	/**
 	 * 状态 0.正常 1.锁定

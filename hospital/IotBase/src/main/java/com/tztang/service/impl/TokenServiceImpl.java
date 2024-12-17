@@ -1,5 +1,6 @@
 package com.tztang.service.impl;
 
+import com.alibaba.fastjson2.JSONObject;
 import com.tztang.core.RedisKeyManage;
 import com.tztang.pojo.entity.AdminDo;
 import com.tztang.pojo.vo.AdminVo;
@@ -10,6 +11,8 @@ import com.tztang.util.AdminTokenHelper;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class TokenServiceImpl extends TokenService<AdminDo> {
@@ -23,7 +26,7 @@ public class TokenServiceImpl extends TokenService<AdminDo> {
     public boolean verifyToken(String newToken) {
         String account = tokenHelper.getAccount(newToken);
         String oldToken = redisCache.getForHash(RedisKeyBuild.createRedisKey(RedisKeyManage.ADMIN_LOGIN, account), "token", String.class);
-        return !newToken.equals(oldToken);
+        return newToken.equals(oldToken);
     }
 
     @Override
@@ -31,14 +34,20 @@ public class TokenServiceImpl extends TokenService<AdminDo> {
         return tokenHelper.createToken(adminDo);
     }
 
-    public String getId(String token) {
-        return tokenHelper.getId(token);
+    @Override
+    public AdminDo getBaseInfo(String token)  {
+        String account = tokenHelper.getAccount(token);
+        return redisCache.getForHash(RedisKeyBuild.createRedisKey(RedisKeyManage.ADMIN_LOGIN, account), "base_info", AdminDo.class);
     }
 
     @Override
-    public String getBaseInfo(String token)  {
+    public void refresh(String token)  {
         String account = tokenHelper.getAccount(token);
-        return redisCache.get(RedisKeyBuild.createRedisKey(RedisKeyManage.ADMIN_LOGIN, account), String.class);
+        redisCache.expire(RedisKeyBuild.createRedisKey(RedisKeyManage.ADMIN_LOGIN, account), 1, TimeUnit.HOURS);
+    }
+
+    public String getId(String token) {
+        return tokenHelper.getId(token);
     }
 
 }

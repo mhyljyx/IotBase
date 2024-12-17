@@ -33,8 +33,8 @@ public class AdminUpdateDto {
 	@ApiModelProperty(name ="name", dataType ="String", value ="管理员名称", required = true)
 	private String name;
 
-	@Length(max = 1, min = 1, message = "管理员角色长度必须为1")
-	@ApiModelProperty(name ="role", dataType ="String", value ="管理员角色", required = true)
-	private String role;
+	@NotBlank(message = "角色类型不能为空")
+	@ApiModelProperty(name ="roleType", dataType ="String", value ="角色类型", required = true)
+	private String roleType;
 
 }

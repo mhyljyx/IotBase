@@ -4,13 +4,18 @@ import cn.hutool.core.util.ObjectUtil;
 import com.tztang.exception.DemoFrameException;
 import com.tztang.filter.JwtAuthenticationTokenFilter;
 import com.tztang.handler.AccessDeniedHandlerImpl;
+import com.tztang.handler.AuthenticationEntryPointHandler;
+import com.tztang.mapper.SysApiMapper;
+import com.tztang.pojo.vo.SecurityPermissionRuleVo;
 import com.tztang.service.AdminService;
 import com.tztang.service.impl.AdminServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -22,6 +27,8 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Configuration
@@ -29,44 +36,14 @@ import javax.annotation.Resource;
 public class WebSecurityConfig {
 
     @Resource
-    private AdminServiceImpl adminService;
-
-    @Resource
-    private PwdConfig pwdConfig;
+    private SysApiMapper sysApiMapper;
 
     @Resource
     private AccessDeniedHandlerImpl accessDeniedHandler;
     @Resource
-    private AuthenticationEntryPoint authenticationEntryPoint;
+    private AuthenticationEntryPointHandler authenticationEntryPoint;
     @Resource
     private JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
-
-    /**
-     * 用户和密码认证
-     */
-    @Bean
-    public AuthenticationProvider authenticationProvider() {
-        return new AuthenticationProvider() {
-            @Override
-            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-                String name = authentication.getName();
-                String pwd = authentication.getCredentials().toString();
-                UserDetails loginUser = adminService.loadUserByUsername(name);
-                if (ObjectUtil.isNull(loginUser) || !pwdConfig.passwordEncoder().matches(pwd, loginUser.getPassword())) {
-                    //密码匹配失败。抛出异常
-                    log.error("访问拒绝，用户名或密码错误!");
-                    throw new DemoFrameException("访问拒绝，用户名或密码错误!");
-                }
-                log.info("访问成功" + loginUser);
-                return new UsernamePasswordAuthenticationToken(loginUser, pwd, loginUser.getAuthorities());
-            }
-
-            @Override
-            public boolean supports(Class<?> authentication) {
-                return authentication.equals(UsernamePasswordAuthenticationToken.class);
-            }
-        };
-    }
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -79,8 +56,17 @@ public class WebSecurityConfig {
         http.authorizeRequests()
                 .antMatchers("/common/admin/api/login").anonymous()
                 .and()
-                .authorizeRequests()
-                .anyRequest().authenticated();
+                .authorizeRequests(authorize -> {
+                    // 动态加载权限规则
+                    List<SecurityPermissionRuleVo> permissionRules = sysApiMapper.queryAllPermissionRule(null);
+                    authorize.antMatchers("/**").hasAnyAuthority("SUPER_ADMIN");
+                    for (SecurityPermissionRuleVo rule : permissionRules) {
+                        authorize.antMatchers(rule.getPath())
+                                .hasAnyAuthority(rule.getRoles().toArray(new String[0])); // 动态绑定角色权限
+                    }
+                    // 默认规则：所有请求需要认证
+                    authorize.anyRequest().authenticated();
+                });
         // 把jwt认证过滤器放到用户密码认证前面
         http.addFilterBefore(jwtAuthenticationTokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();

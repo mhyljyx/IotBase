@@ -39,8 +39,8 @@ public class UserVo {
     @ApiModelProperty(name ="address", dataType ="String", value ="地址")
     private String address;
 
-    @ApiModelProperty(name ="role", dataType ="String", value ="角色")
-    private String role;
+    @ApiModelProperty(name ="roleType", dataType ="String", value ="角色类型")
+    private String roleType;
 
     @ApiModelProperty(name ="type", dataType ="String", value ="人员类型")
     private String type;

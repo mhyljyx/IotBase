@@ -1,5 +1,7 @@
 package com.tztang.service;
 
+import com.alibaba.fastjson2.JSONObject;
+
 public abstract class TokenService<T> {
 
     //验证token
@@ -13,11 +15,13 @@ public abstract class TokenService<T> {
     }
 
     //获取基本信息
-    public String getBaseInfo(String token) throws InstantiationException, IllegalAccessException {
+    public T getBaseInfo(String token) throws InstantiationException, IllegalAccessException {
         return null;
     }
 
     //刷新存活时间
-    public void refresh()
+    public void refresh(String token) {
+
+    }
 
 }

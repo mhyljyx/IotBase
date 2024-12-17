@@ -18,7 +18,7 @@ public abstract class TokenHelper<T> {
     public static final String ID = "id";
     public static final String NAME = "name";
     public static final String ACCOUNT = "account";
-    public static final String ROLE_ID = "roleId";
+    public static final String ROLE_TYPE = "roleType";
 
 
     //根据id和名称生成token字符串
@@ -41,8 +41,8 @@ public abstract class TokenHelper<T> {
         return null;
     }
 
-    //从token字符串获取roleId
-    public String getRoleId(String token) {
+    //从token字符串获取roleType
+    public String getRoleType(String token) {
         return null;
     }
 

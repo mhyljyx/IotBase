@@ -4,10 +4,7 @@ import com.alibaba.fastjson2.util.ParameterizedTypeImpl;
 import com.tztang.util.StringUtil;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -140,4 +137,5 @@ public class CacheUtil {
         }
         return list.size() == 0 || Objects.isNull(list.get(0));
     }
+
 }

@@ -14,7 +14,7 @@ import java.util.Date;
  * @Date 2024-11-21
  */
 @Data
-@TableName("user")
+@TableName("sys_user")
 public class UserDo extends BaseTableData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -69,9 +69,9 @@ public class UserDo extends BaseTableData implements Serializable {
 	private String address;
 
 	/**
-	 * 角色
+	 * 角色类型
 	 */
-	private Integer roleId;
+	private String roleType;
 
 	/**
 	 * 人员类型

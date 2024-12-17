@@ -14,7 +14,7 @@ import java.util.Date;
  * @Date 2024-11-21
  */
 @Data
-@TableName("dept")
+@TableName("sys_dept")
 public class DeptDo extends BaseTableData implements Serializable {
 
 	public static final String ROOT_ID = "0";

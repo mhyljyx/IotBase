@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tztang.mapper.SysApiMapper">
+
+    <resultMap id="permissionRuleVoMap" type="com.tztang.pojo.vo.SecurityPermissionRuleVo">
+        <!-- 对应 path 属性 -->
+        <result property="path" column="path" />
+        <!-- 对应 roles 属性，嵌套查询 -->
+        <collection property="roles" ofType="java.lang.String">
+            <result column="type" />
+        </collection>
+    </resultMap>
+
+    <select id="queryAllPermissionRule" resultMap="permissionRuleVoMap">
+        SELECT
+            sys_api.url,
+            sys_role_dic.type
+        FROM
+            sys_api sys_api
+        LEFT JOIN sys_role_api sys_role_api ON sys_api.id = sys_role_api.api_id
+        LEFT JOIN sys_role_dic sys_role_dic ON sys_role_dic.type = sys_role_api.role_type
+        <where>
+            sys_api.is_del = '0'
+            <if test="roleType != null and roleType != ''">
+                AND sys_role_dic.role_type = #{roleType}
+            </if>
+        </where>
+    </select>
+
+</mapper>

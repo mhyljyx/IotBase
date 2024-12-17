@@ -112,6 +112,8 @@ public enum BaseCode {
     ADMIN_NOT_EXIST(30010,"管理员不存在"),
 
     ADMIN_EXIST(30011,"管理员已存在"),
+
+    ACCOUNT_PWD_ERROR(30012,"账号或密码错误"),
     
     PROGRAM_NOT_EXIST(40000,"节目不存在"),
     

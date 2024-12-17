@@ -4,6 +4,8 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONArray;
+import com.alibaba.fastjson2.JSONObject;
+import com.tztang.pojo.entity.AdminDo;
 import com.tztang.service.TokenService;
 import com.tztang.service.impl.TokenServiceImpl;
 import lombok.SneakyThrows;
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Component
@@ -37,8 +40,8 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 获取token
         String token = request.getHeader("token");
-        if (StrUtil.isBlank(token)) {
-            // 放行
+        // 跳过特定路径（放行 /common/admin/api/login）
+        if ("/common/admin/api/login".equals(request.getRequestURI())) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -49,17 +52,13 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
             throw new AuthenticationException("当前token已过期");
         }
         // 从redis中获取用户信息
-        String info = tokenService.getBaseInfo(token);
-        Object baseInfo = JSON.parseObject(info).get("base_info");
-        JSONArray apiIds = JSON.parseObject(info).getJSONArray("api_permission");
+        AdminDo adminDo = tokenService.getBaseInfo(token);
         List<GrantedAuthority> authorities = new ArrayList<>();
-        if (CollUtil.isNotEmpty(apiIds)) {
-            apiIds.forEach(api -> authorities.add(new SimpleGrantedAuthority("ROLE_" + api)));
-        }
+        authorities.add(new SimpleGrantedAuthority(adminDo.getRoleType()));
         // 更新存活时间
-
+        tokenService.refresh(token);
         // 存入SecurityContextHolder
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(baseInfo, null, authorities);
+        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(adminDo, null, authorities);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);
         // 放行
         filterChain.doFilter(request, response);

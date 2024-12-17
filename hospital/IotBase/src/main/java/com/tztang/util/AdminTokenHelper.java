@@ -22,7 +22,7 @@ public class AdminTokenHelper extends TokenHelper<AdminDo> {
                 .claim(ID, adminDo.getId())
                 .claim(NAME, adminDo.getName())
                 .claim(ACCOUNT, adminDo.getAccount())
-                .claim(ROLE_ID, adminDo.getRoleId())
+                .claim(ROLE_TYPE, adminDo.getRoleType())
                 .signWith(SignatureAlgorithm.HS512, TOKEN_SIGN_KEY)
                 .compressWith(CompressionCodecs.GZIP)
                 .compact();
@@ -47,8 +47,8 @@ public class AdminTokenHelper extends TokenHelper<AdminDo> {
     }
 
     @Override
-    public String getRoleId(String token) {
-        return (String) getClaims(token).get(ROLE_ID);
+    public String getRoleType(String token) {
+        return (String) getClaims(token).get(ROLE_TYPE);
     }
 
 }

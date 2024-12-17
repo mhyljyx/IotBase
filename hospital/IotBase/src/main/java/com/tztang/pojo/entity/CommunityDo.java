@@ -14,7 +14,7 @@ import java.util.Date;
  * @Date 2024-11-21
  */
 @Data
-@TableName("community")
+@TableName("sys_community")
 public class CommunityDo extends BaseTableData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
