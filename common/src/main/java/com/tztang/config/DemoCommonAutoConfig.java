@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Bean;
  * @description: 通用配置
  * @author: tztang
  **/
-
 public class DemoCommonAutoConfig {
     
     @Bean

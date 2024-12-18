@@ -17,6 +17,22 @@ spring:
     port: 9999
     password: 123456
     host: localhost
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: never
+    properties:
+      org:
+        quartz:
+          jobStore:
+            isClustered: false  # 关闭集群模式
+            tablePrefix: QRTZ_  # 指定数据库表的前缀
+            misfireThreshold: 60000  # 设置过期时间（毫秒）
+          threadPool:
+            threadCount: 10  # 设置线程池大小
+          scheduler:
+            instanceId: AUTO  # 自动生成实例ID，多个节点共享
+            instanceName: MyScheduler  # 为调度器实例指定名称
 
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
